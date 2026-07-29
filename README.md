@@ -1,2 +1,2 @@
 # useprism.xyz
-website of prism 
+more stuff soon
