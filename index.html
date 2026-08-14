@@ -1,155 +1,560 @@
-<html lang="en" class="dark" style="cursor: none;">
-  <head>
-    <meta charset="UTF-8">
-    <link rel="icon" href="data:image/svg+xml,&lt;svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'&gt;&lt;text y='75' font-size='80' font-family='monospace' fill='%2360a5fa'&gt;N&lt;/text&gt;&lt;/svg&gt;">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@nyxolz</title>
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-      tailwind.config = {
-        darkMode: 'class',
-        theme: {
-          extend: {
-            fontFamily: {
-              sans: ['Inter', 'sans-serif'],
-              mono: ['JetBrains Mono', 'monospace'],
-            }
-          }
-        }
-      }
-    </script>
-    
-    <style>
-      * { cursor: none !important; }
-      body { background-color: #ffffff; color: #171717; transition: background-color 0.3s ease; }
-      html.dark body { background-color: #0a0a0a; color: #e5e5e5; }
-    </style>
-  </head>
-  <body>
-    <div id="root">
-      <canvas id="cursor-trail" class="pointer-events-none fixed inset-0 z-[9999]" aria-hidden="true"></canvas>
-      <main>
-        <header class="w-full py-4 bg-transparent transition-colors">
-          <div class="max-w-3xl mx-auto px-4 md:px-8 flex items-center justify-between">
-            <a class="text-md font-semibold tracking-tight text-neutral-900 dark:text-neutral-200 hover:text-neutral-500 dark:hover:text-neutral-400 transition-colors" href="/">@nyxolz</a>
-            <div class="flex items-center gap-6">
-              <button id="theme-toggle" aria-label="Toggle theme" class="w-8 h-8 flex items-center justify-center rounded-full text-neutral-500 dark:text-neutral-400 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <circle cx="12" cy="12" r="4"></circle>
-                  <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path>
-                </svg>
-              </button>
-            </div>
-          </div>
-          <div class="max-w-7xl mx-auto md:px-8 mt-4">
-            <div class="h-px bg-neutral-200 dark:bg-neutral-800" style="width: 100%;"></div>
-          </div>
-        </header>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prism, MacOS external for roblox </title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #060607;
+  --bg-rise: #121315;
+  --panel: #15161a;
+  --panel-border: #2a2d33;
+  --text: #f2efea;
+  --text-dim: #a7adb3;
+  --text-faint: #6c7279;
+  --accent: #3d7dfc;
+  --accent-soft: rgba(61, 125, 252, 0.16);
+  --gradient: linear-gradient(135deg, #f4f2ec 0%, #b8bcc1 46%, #71767d 100%);
+  --font-display: 'Bricolage Grotesque', 'Inter', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 22px;
+  --max-width: 1180px;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+}
+h1, h2, h3 { font-family: var(--font-display); letter-spacing: -0.02em; }
+a { color: inherit; }
+button { font-family: var(--font-body); }
+::selection { background: var(--accent); color: #0a0e1a; }
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--panel-border); border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+.container { max-width: var(--max-width); margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+.section-title { font-size: clamp(2.2rem, 4.4vw, 3.4rem); font-weight: 700; margin-bottom: 44px; }
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s cubic-bezier(0.2,0.8,0.2,1), transform 0.7s cubic-bezier(0.2,0.8,0.2,1); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+section { position: relative; z-index: 1; padding: 120px 0; }
+@media (max-width: 720px) { section { padding: 80px 0; } }
 
-        <section class="max-w-3xl mx-auto py-2 px-4 md:px-0 space-y-6 mt-8">
-          <div class="relative">
-            <svg class="absolute inset-0 w-full h-full pointer-events-none" xmlns="http://www.w3.org/2000/svg">
-              <rect x="0.5" y="0.5" width="calc(100% - 1px)" height="calc(100% - 1px)" rx="8" ry="8" fill="none" stroke-width="1" stroke-linejoin="round" stroke-linecap="round" class="stroke-neutral-200 dark:stroke-neutral-800" stroke-dasharray="1 1"></rect>
-            </svg>
-            <div class="relative rounded-lg p-6">
-              <div class="mb-4">
-                <h2 class="text-xs font-mono tracking-wider text-neutral-400 dark:text-neutral-600"><span class="relative inline-block">[contact]</span></h2>
-              </div>
-              <div class="space-y-3">
-                <a href="https://github.com/nyxolz" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 p-3 rounded-lg border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-[#1a1a1a] hover:border-neutral-300 dark:hover:border-neutral-700 transition-colors group">
-                  <div class="text-neutral-600 dark:text-neutral-400 group-hover:text-neutral-900 dark:group-hover:text-neutral-100 transition-colors">
-                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"></path></svg>
-                  </div>
-                  <div class="flex-1">
-                    <div class="text-xs font-medium text-neutral-900 dark:text-neutral-100">GitHub</div>
-                    <div class="text-xs font-mono text-neutral-500 dark:text-neutral-500">@nyxolz</div>
-                  </div>
-                  <svg class="w-4 h-4 text-neutral-400 dark:text-neutral-600 group-hover:text-neutral-600 dark:group-hover:text-neutral-400 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                </a>
-                
-                <a href="https://discord.com/users/nyxolz" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 p-3 rounded-lg border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-[#1a1a1a] hover:border-neutral-300 dark:hover:border-neutral-700 transition-colors group">
-                  <div class="text-neutral-600 dark:text-neutral-400 group-hover:text-neutral-900 dark:group-hover:text-neutral-100 transition-colors">
-                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515a.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0a12.64 12.64 0 0 0-.617-1.25a.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057a19.9 19.9 0 0 0 5.993 3.03a.078.078 0 0 0 .084-.028a14.09 14.09 0 0 0 1.226-1.994a.076.076 0 0 0-.041-.106a13.107 13.107 0 0 1-1.872-.892a.077.077 0 0 1-.008-.128a10.2 10.2 0 0 0 .372-.292a.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127a12.299 12.299 0 0 1-1.873.892a.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028a19.839 19.839 0 0 0 6.002-3.03a.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.956-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.955-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.946 2.418-2.157 2.418z"></path></svg>
-                  </div>
-                  <div class="flex-1">
-                    <div class="text-xs font-medium text-neutral-900 dark:text-neutral-100">Discord</div>
-                    <div class="text-xs font-mono text-neutral-500 dark:text-neutral-500">@nyxolz</div>
-                  </div>
-                  <svg class="w-4 h-4 text-neutral-400 dark:text-neutral-600 group-hover:text-neutral-600 dark:group-hover:text-neutral-400 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                </a>
-              </div>
-            </div>
-          </div>
-        </section>
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background:
+    radial-gradient(1200px circle at 10% -10%, rgba(61, 125, 252, 0.06), transparent 58%),
+    radial-gradient(900px circle at 90% 10%, rgba(255,255,255,0.05), transparent 60%),
+    linear-gradient(180deg, var(--bg) 0%, var(--bg-rise) 100%);
+  pointer-events: none;
+}
+body::after {
+  content: '';
+  position: fixed;
+  inset: -10%;
+  z-index: 0;
+  background:
+    radial-gradient(60% 70% at 50% 0%, rgba(255,255,255,0.04), transparent 70%),
+    radial-gradient(100% 120% at 50% 100%, rgba(0,0,0,0.22), transparent 70%);
+  pointer-events: none;
+}
 
-        <footer class="max-w-3xl mx-auto py-6 px-4 md:px-0 mt-6">
-          <div class="border-t border-neutral-200 dark:border-neutral-800 pt-4 text-center">
-            <p class="text-xs text-neutral-400 dark:text-neutral-600">made by @nyxolz with ❤️</p>
-          </div>
-        </footer>
-      </main>
+.nav {
+  position: fixed;
+  top: 22px;
+  left: 24px;
+  right: 24px;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: var(--text);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.1rem;
+  letter-spacing: -0.01em;
+  padding: 6px 14px 6px 6px;
+  border-radius: 999px;
+  background: rgba(24, 17, 20, 0.6);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--panel-border);
+}
+.nav-brand-name { color: var(--accent); }
+.nav-logo { width: 30px; height: 30px; border-radius: 50%; object-fit: cover; }
+.nav-actions { display: flex; gap: 10px; }
+.nav-btn {
+  appearance: none;
+  cursor: pointer;
+  background: rgba(24, 17, 20, 0.6);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--panel-border);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  padding: 11px 20px;
+  border-radius: 999px;
+  text-decoration: none;
+  transition: border-color 0.25s ease, transform 0.25s ease, background 0.25s ease;
+}
+.nav-btn:hover { transform: translateY(-2px); border-color: var(--accent); }
+
+.hero {
+  padding: 220px 0 120px;
+  text-align: center;
+}
+.hero-title {
+  font-size: clamp(2.4rem, 5.2vw, 3.8rem);
+  font-weight: 800;
+  margin-bottom: 20px;
+  line-height: 1.1;
+}
+.hero-subtitle {
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  color: var(--text-dim);
+  max-width: 620px;
+  margin: 0 auto 40px;
+  line-height: 1.6;
+}
+.hero-buttons {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.btn {
+  appearance: none;
+  cursor: pointer;
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 12px 28px;
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.25s ease;
+}
+.btn:hover {
+  border-color: var(--accent);
+  background: rgba(61, 125, 252, 0.1);
+  transform: translateY(-2px);
+}
+.btn-primary {
+  background: linear-gradient(135deg, var(--accent), #2563eb);
+  border: none;
+  color: #fff;
+}
+.btn-primary:hover {
+  filter: brightness(1.1);
+}
+
+.features {
+  padding: 120px 0;
+}
+.features-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+.features-header h2 {
+  font-size: clamp(2.2rem, 4.4vw, 3.4rem);
+  margin-bottom: 16px;
+}
+.features-header p {
+  color: var(--text-dim);
+  font-size: 1.05rem;
+  max-width: 500px;
+  margin: 0 auto;
+}
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+  max-width: 1180px;
+  margin: 0 auto;
+}
+.feature-card {
+  background: linear-gradient(135deg, rgba(21, 22, 26, 0.6), rgba(21, 22, 26, 0.3));
+  border: 1px solid var(--panel-border);
+  border-radius: var(--radius-md);
+  padding: 28px;
+  transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.feature-card:hover {
+  border-color: rgba(61, 125, 252, 0.4);
+  background: linear-gradient(135deg, rgba(61, 125, 252, 0.08), rgba(61, 125, 252, 0.04));
+  transform: translateY(-4px);
+}
+.feature-card h3 {
+  font-size: 1.15rem;
+  margin-bottom: 8px;
+  color: var(--text);
+}
+.feature-card p {
+  color: var(--text-dim);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.comparison {
+  padding: 120px 0;
+}
+.comparison-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+.comparison-header h2 {
+  font-size: clamp(2.2rem, 4.4vw, 3.4rem);
+  margin-bottom: 16px;
+}
+.comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  margin-bottom: 40px;
+}
+.comparison-table th {
+  background: linear-gradient(135deg, rgba(21, 22, 26, 0.8), rgba(21, 22, 26, 0.4));
+  padding: 16px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.9rem;
+  border-bottom: 1px solid var(--panel-border);
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.comparison-table td {
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--panel-border);
+  font-size: 0.95rem;
+}
+.comparison-table tr:last-child td {
+  border-bottom: none;
+}
+.check { color: var(--accent); font-weight: 600; }
+.cross { color: var(--text-faint); }
+
+.install {
+  padding: 120px 0;
+}
+.install-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+.install-header h2 {
+  font-size: clamp(2.2rem, 4.4vw, 3.4rem);
+  margin-bottom: 16px;
+}
+.install-box {
+  background: linear-gradient(135deg, rgba(21, 22, 26, 0.6), rgba(21, 22, 26, 0.3));
+  border: 1px solid var(--panel-border);
+  border-radius: var(--radius-md);
+  padding: 40px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+.install-box h3 {
+  font-size: 1.1rem;
+  margin-bottom: 20px;
+  color: var(--text);
+}
+.code-block {
+  background: rgba(6, 6, 7, 0.8);
+  border: 1px solid var(--panel-border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  font-family: monospace;
+  font-size: 0.9rem;
+  color: var(--text-dim);
+  word-break: break-all;
+  margin-bottom: 16px;
+  overflow-x: auto;
+}
+.copy-btn {
+  appearance: none;
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  color: var(--text);
+  padding: 10px 20px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: all 0.25s ease;
+}
+.copy-btn:hover {
+  border-color: var(--accent);
+  background: rgba(61, 125, 252, 0.1);
+}
+
+footer {
+  border-top: 1px solid var(--panel-border);
+  padding: 40px 0;
+  text-align: center;
+  color: var(--text-faint);
+  font-size: 0.9rem;
+  position: relative;
+  z-index: 1;
+}
+footer p { margin: 4px 0; }
+
+.mobile-warning {
+  position: fixed;
+  inset: 0;
+  background: var(--bg);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+  text-align: center;
+  padding: 20px;
+}
+.mobile-warning.show { display: flex; flex-direction: column; gap: 20px; }
+.mobile-warning p { color: var(--text-dim); max-width: 300px; }
+
+@media (orientation: portrait) {
+  body > :not(.mobile-warning) { display: none; }
+  .mobile-warning { display: flex; }
+}
+
+@media (max-width: 720px) {
+  .nav { flex-direction: column; gap: 12px; }
+  .nav-actions { width: 100%; justify-content: center; }
+  .hero { padding: 160px 0 80px; }
+  .hero-buttons { flex-direction: column; }
+  .btn { width: 100%; }
+}
+</style>
+</head>
+<body>
+
+<div class="mobile-warning">
+  <p>Please rotate your device to landscape mode to access this site.</p>
+  <p style="font-size: 0.85rem; color: var(--text-faint);">This application is designed for desktop use only.</p>
+</div>
+
+<nav class="nav">
+  <a class="nav-brand" href="#">
+    <img class="nav-logo" src="AppIcon.png" alt="Prism">
+    <span class="nav-brand-name">prism</span>
+  </a>
+  <div class="nav-actions">
+    <a href="#features" class="nav-btn">features</a>
+    <a href="#install" class="nav-btn">install</a>
+    <a href="https://discord.gg/5hjeaF3Uj" target="_blank" rel="noreferrer" class="nav-btn">discord</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="container">
+    <h1 class="hero-title">Prism</h1>
+    <p class="hero-subtitle">A MacOS External for Roblox.</p>
+    <div class="hero-buttons">
+      <button class="btn btn-primary">Get Started</button>
+      <button class="btn">Learn More</button>
     </div>
+  </div>
+</section>
 
-    <script>
-      const themeToggleBtn = document.getElementById('theme-toggle');
-      const htmlElement = document.documentElement;
+<section class="features" id="features">
+  <div class="container">
+    <div class="features-header">
+      <h2 class="section-title">Features</h2>
+    </div>
+    <div class="features-grid">
+      <article class="feature-card reveal">
+        <h3>ESP</h3>
+        <p>See players through walls with health bars, distance labels, tracers and name tags.</p>
+      </article>
+      <article class="feature-card reveal">
+        <h3>Aimbot</h3>
+        <p>Advanced targeting with customizable FOV radius and smoothness settings.</p>
+      </article>
+      <article class="feature-card reveal">
+        <h3>Local Player</h3>
+        <p>Adjust walkspeed, jump power, gravity, and enable noclip for exploration.</p>
+      </article>
+      <article class="feature-card reveal">
+        <h3>Server Tools</h3>
+        <p>Server hop instantly, rejoin current game, find populated servers, or join by job ID.</p>
+      </article>
+      <article class="feature-card reveal">
+        <h3>FFlags</h3>
+        <p>Access Roblox feature flags with automatic ClientAppSettings.json generation.</p>
+      </article>
+      <article class="feature-card reveal">
+        <h3>Game Info</h3>
+        <p>View place ID, job ID, player count, server region, and game version in real time.</p>
+      </article>
+      <article class="feature-card reveal">
+        <h3>Profiles</h3>
+        <p>Save and load configuration profiles, export and import settings.</p>
+      </article>
+      <article class="feature-card reveal">
+        <h3>Console</h3>
+        <p>Integrated command console for automation, debugging, and advanced control.</p>
+      </article>
+      <article class="feature-card reveal">
+        <h3>Color Picker</h3>
+        <p>Customize colors for ESP boxes, aimbot circles, and team-based targeting.</p>
+      </article>
+      <article class="feature-card reveal">
+        <h3>Anti-AFK</h3>
+        <p>Automatic protection against idle disconnections to keep you in game longer.</p>
+      </article>
+      <article class="feature-card reveal">
+        <h3>Monitoring</h3>
+        <p>Live status indicators, activity logs, uptime tracking, and connection state.</p>
+      </article>
+      <article class="feature-card reveal">
+        <h3>Visual Tweaks</h3>
+        <p>Fullbright rendering, custom fonts, flat skies, and texture quality overrides.</p>
+      </article>
+    </div>
+  </div>
+</section>
 
-      themeToggleBtn.addEventListener('click', () => {
-        htmlElement.classList.toggle('dark');
-      });
+<section class="comparison" id="comparison">
+  <div class="container">
+    <div class="comparison-header">
+      <h2 class="section-title">Why Prism</h2>
+    </div>
+    <table class="comparison-table reveal">
+      <thead>
+        <tr>
+          <th>Feature</th>
+          <th>Prism</th>
+          <th>Others</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>ESP</td>
+          <td><span class="check">Yes</span></td>
+          <td><span class="cross">Varies</span></td>
+        </tr>
+        <tr>
+          <td>Aimbot</td>
+          <td><span class="check">Yes</span></td>
+          <td><span class="cross">Limited</span></td>
+        </tr>
+        <tr>
+          <td>FFlag Management</td>
+          <td><span class="check">Yes</span></td>
+          <td><span class="cross">No</span></td>
+        </tr>
+        <tr>
+          <td>Profile System</td>
+          <td><span class="check">Yes</span></td>
+          <td><span class="check">Yes</span></td>
+        </tr>
+        <tr>
+          <td>Command Console</td>
+          <td><span class="check">Yes</span></td>
+          <td><span class="cross">No</span></td>
+        </tr>
+        <tr>
+          <td>Server Tools</td>
+          <td><span class="check">Yes</span></td>
+          <td><span class="check">Varies</span></td>
+        </tr>
+        <tr>
+          <td>Custom Fonts</td>
+          <td><span class="check">Yes</span></td>
+          <td><span class="cross">No</span></td>
+        </tr>
+        <tr>
+          <td>Real Time Stats</td>
+          <td><span class="check">Yes</span></td>
+          <td><span class="cross">Limited</span></td>
+        </tr>
+        <tr>
+          <td>Active Development</td>
+          <td><span class="check">Yes</span></td>
+          <td><span class="cross">Varies</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
 
-      const canvas = document.getElementById('cursor-trail');
-      const ctx = canvas.getContext('2d');
-      let points = [];
-      let mouse = { x: 0, y: 0 };
+<section class="install" id="install">
+  <div class="container">
+    <div class="install-header">
+      <h2 class="section-title">Installation</h2>
+    </div>
+    <div class="install-box reveal">
+      <h3>macOS Only</h3>
+      <div class="code-block">Prism is still in development</div>
+      <button class="copy-btn">copy</button>
+    </div>
+  </div>
+</section>
 
-      function resize() {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
+<footer>
+  <div class="container">
+    <p><a href="https://armorixteam.xyz" target="_blank" rel="noreferrer" style="color: var(--accent); text-decoration: none;">armorixteam.xyz</a></p>
+    <p>Use at your own risk. Prism is not affiliated with Roblox Corporation.</p>
+  </div>
+</footer>
+
+<script>
+function setupReveal() {
+  const items = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
       }
-      window.addEventListener('resize', resize);
-      resize();
+    });
+  }, { threshold: 0.15 });
+  items.forEach((item) => observer.observe(item));
+}
 
-      window.addEventListener('mousemove', (e) => {
-        mouse.x = e.clientX;
-        mouse.y = e.clientY;
-        points.push({ x: mouse.x, y: mouse.y, life: 1 });
-      });
+document.querySelectorAll('.copy-btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    const codeBlock = this.previousElementSibling;
+    const code = codeBlock.textContent.trim();
+    navigator.clipboard.writeText(code).then(() => {
+      const original = this.textContent;
+      this.textContent = 'copied';
+      setTimeout(() => { this.textContent = original; }, 2000);
+    });
+  });
+});
 
-      function animate() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        
-        ctx.beginPath();
-        ctx.arc(mouse.x, mouse.y, 4, 0, Math.PI * 2);
-        ctx.fillStyle = htmlElement.classList.contains('dark') ? 'rgba(255,255,255,0.8)' : 'rgba(0,0,0,0.8)';
-        ctx.fill();
+document.addEventListener('DOMContentLoaded', setupReveal);
+</script>
 
-        ctx.beginPath();
-        for (let i = 0; i < points.length; i++) {
-          const p = points[i];
-          ctx.lineWidth = p.life * 4;
-          ctx.lineCap = 'round';
-          ctx.lineJoin = 'round';
-          ctx.strokeStyle = htmlElement.classList.contains('dark') 
-            ? `rgba(255, 255, 255, ${p.life * 0.5})` 
-            : `rgba(0, 0, 0, ${p.life * 0.5})`;
-
-          if (i === 0) ctx.moveTo(p.x, p.y);
-          else ctx.lineTo(p.x, p.y);
-          
-          p.life -= 0.05;
-        }
-        ctx.stroke();
-
-        points = points.filter(p => p.life > 0);
-        requestAnimationFrame(animate);
-      }
-      animate();
-    </script>
-  </body>
+</body>
 </html>
