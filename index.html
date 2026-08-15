@@ -3,355 +3,399 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Prism, MacOS external for roblox </title>
+<title>prism</title>
+<link rel="icon" type="image/png" href="AppIcon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root {
-  --bg: #060607;
-  --bg-rise: #121315;
-  --panel: #15161a;
-  --panel-border: #2a2d33;
-  --text: #f2efea;
-  --text-dim: #a7adb3;
-  --text-faint: #6c7279;
-  --accent: #3d7dfc;
-  --accent-soft: rgba(61, 125, 252, 0.16);
-  --gradient: linear-gradient(135deg, #f4f2ec 0%, #b8bcc1 46%, #71767d 100%);
-  --font-display: 'Bricolage Grotesque', 'Inter', sans-serif;
-  --font-body: 'Inter', sans-serif;
-  --radius-sm: 8px;
-  --radius-md: 14px;
-  --radius-lg: 22px;
-  --max-width: 1180px;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
-* { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+
+:root {
+  --bg-primary: #0d0d0d;
+  --glass-light: rgba(255, 255, 255, 0.02);
+  --glass-border: rgba(255, 255, 255, 0.06);
+  --text-primary: #ffffff;
+  --text-secondary: #999999;
+  --text-tertiary: #555555;
+  --accent: #2f6feb;
+  --accent-light: #4483f6;
+  --radius: 14px;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-  background: var(--bg);
-  color: var(--text);
-  font-family: var(--font-body);
-  min-height: 100vh;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   overflow-x: hidden;
   position: relative;
 }
-h1, h2, h3 { font-family: var(--font-display); letter-spacing: -0.02em; }
-a { color: inherit; }
-button { font-family: var(--font-body); }
-::selection { background: var(--accent); color: #0a0e1a; }
-::-webkit-scrollbar { width: 10px; }
-::-webkit-scrollbar-track { background: var(--bg); }
-::-webkit-scrollbar-thumb { background: var(--panel-border); border-radius: 10px; }
-::-webkit-scrollbar-thumb:hover { background: var(--accent); }
-.container { max-width: var(--max-width); margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
-.section-title { font-size: clamp(2.2rem, 4.4vw, 3.4rem); font-weight: 700; margin-bottom: 44px; }
-.reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s cubic-bezier(0.2,0.8,0.2,1), transform 0.7s cubic-bezier(0.2,0.8,0.2,1); }
-.reveal.visible { opacity: 1; transform: translateY(0); }
-section { position: relative; z-index: 1; padding: 120px 0; }
-@media (max-width: 720px) { section { padding: 80px 0; } }
 
 body::before {
   content: '';
   position: fixed;
   inset: 0;
-  z-index: 0;
-  background:
-    radial-gradient(1200px circle at 10% -10%, rgba(61, 125, 252, 0.06), transparent 58%),
-    radial-gradient(900px circle at 90% 10%, rgba(255,255,255,0.05), transparent 60%),
-    linear-gradient(180deg, var(--bg) 0%, var(--bg-rise) 100%);
+  background: 
+    radial-gradient(circle at 50% 0%, rgba(47, 111, 235, 0.025), transparent 60%);
   pointer-events: none;
-}
-body::after {
-  content: '';
-  position: fixed;
-  inset: -10%;
   z-index: 0;
-  background:
-    radial-gradient(60% 70% at 50% 0%, rgba(255,255,255,0.04), transparent 70%),
-    radial-gradient(100% 120% at 50% 100%, rgba(0,0,0,0.22), transparent 70%);
-  pointer-events: none;
 }
-
-.nav {
-  position: fixed;
-  top: 22px;
-  left: 24px;
-  right: 24px;
-  z-index: 100;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.nav-brand {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  text-decoration: none;
-  color: var(--text);
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 1.1rem;
-  letter-spacing: -0.01em;
-  padding: 6px 14px 6px 6px;
-  border-radius: 999px;
-  background: rgba(24, 17, 20, 0.6);
-  backdrop-filter: blur(16px);
-  border: 1px solid var(--panel-border);
-}
-.nav-brand-name { color: var(--accent); }
-.nav-logo { width: 30px; height: 30px; border-radius: 50%; object-fit: cover; }
-.nav-actions { display: flex; gap: 10px; }
-.nav-btn {
-  appearance: none;
-  cursor: pointer;
-  background: rgba(24, 17, 20, 0.6);
-  backdrop-filter: blur(16px);
-  border: 1px solid var(--panel-border);
-  color: var(--text);
-  font-family: var(--font-body);
-  font-size: 0.82rem;
-  font-weight: 500;
-  letter-spacing: 0.02em;
-  padding: 11px 20px;
-  border-radius: 999px;
-  text-decoration: none;
-  transition: border-color 0.25s ease, transform 0.25s ease, background 0.25s ease;
-}
-.nav-btn:hover { transform: translateY(-2px); border-color: var(--accent); }
-
-.hero {
-  padding: 220px 0 120px;
-  text-align: center;
-}
-.hero-title {
-  font-size: clamp(2.4rem, 5.2vw, 3.8rem);
-  font-weight: 800;
-  margin-bottom: 20px;
-  line-height: 1.1;
-}
-.hero-subtitle {
-  font-size: clamp(1rem, 2vw, 1.2rem);
-  color: var(--text-dim);
-  max-width: 620px;
-  margin: 0 auto 40px;
-  line-height: 1.6;
-}
-.hero-buttons {
-  display: flex;
-  gap: 12px;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-.btn {
-  appearance: none;
-  cursor: pointer;
-  background: var(--panel);
-  border: 1px solid var(--panel-border);
-  color: var(--text);
-  font-family: var(--font-body);
-  font-size: 0.9rem;
-  font-weight: 600;
-  padding: 12px 28px;
-  border-radius: var(--radius-md);
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  transition: all 0.25s ease;
-}
-.btn:hover {
-  border-color: var(--accent);
-  background: rgba(61, 125, 252, 0.1);
-  transform: translateY(-2px);
-}
-.btn-primary {
-  background: linear-gradient(135deg, var(--accent), #2563eb);
-  border: none;
-  color: #fff;
-}
-.btn-primary:hover {
-  filter: brightness(1.1);
-}
-
-.features {
-  padding: 120px 0;
-}
-.features-header {
-  text-align: center;
-  margin-bottom: 60px;
-}
-.features-header h2 {
-  font-size: clamp(2.2rem, 4.4vw, 3.4rem);
-  margin-bottom: 16px;
-}
-.features-header p {
-  color: var(--text-dim);
-  font-size: 1.05rem;
-  max-width: 500px;
-  margin: 0 auto;
-}
-.features-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 16px;
-  max-width: 1180px;
-  margin: 0 auto;
-}
-.feature-card {
-  background: linear-gradient(135deg, rgba(21, 22, 26, 0.6), rgba(21, 22, 26, 0.3));
-  border: 1px solid var(--panel-border);
-  border-radius: var(--radius-md);
-  padding: 28px;
-  transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
-}
-.feature-card:hover {
-  border-color: rgba(61, 125, 252, 0.4);
-  background: linear-gradient(135deg, rgba(61, 125, 252, 0.08), rgba(61, 125, 252, 0.04));
-  transform: translateY(-4px);
-}
-.feature-card h3 {
-  font-size: 1.15rem;
-  margin-bottom: 8px;
-  color: var(--text);
-}
-.feature-card p {
-  color: var(--text-dim);
-  font-size: 0.95rem;
-  line-height: 1.5;
-}
-
-.comparison {
-  padding: 120px 0;
-}
-.comparison-header {
-  text-align: center;
-  margin-bottom: 60px;
-}
-.comparison-header h2 {
-  font-size: clamp(2.2rem, 4.4vw, 3.4rem);
-  margin-bottom: 16px;
-}
-.comparison-table {
-  width: 100%;
-  border-collapse: collapse;
-  background: var(--panel);
-  border: 1px solid var(--panel-border);
-  border-radius: var(--radius-md);
-  overflow: hidden;
-  margin-bottom: 40px;
-}
-.comparison-table th {
-  background: linear-gradient(135deg, rgba(21, 22, 26, 0.8), rgba(21, 22, 26, 0.4));
-  padding: 16px;
-  text-align: left;
-  font-weight: 600;
-  font-size: 0.9rem;
-  border-bottom: 1px solid var(--panel-border);
-  color: var(--text-dim);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-.comparison-table td {
-  padding: 14px 16px;
-  border-bottom: 1px solid var(--panel-border);
-  font-size: 0.95rem;
-}
-.comparison-table tr:last-child td {
-  border-bottom: none;
-}
-.check { color: var(--accent); font-weight: 600; }
-.cross { color: var(--text-faint); }
-
-.install {
-  padding: 120px 0;
-}
-.install-header {
-  text-align: center;
-  margin-bottom: 60px;
-}
-.install-header h2 {
-  font-size: clamp(2.2rem, 4.4vw, 3.4rem);
-  margin-bottom: 16px;
-}
-.install-box {
-  background: linear-gradient(135deg, rgba(21, 22, 26, 0.6), rgba(21, 22, 26, 0.3));
-  border: 1px solid var(--panel-border);
-  border-radius: var(--radius-md);
-  padding: 40px;
-  max-width: 600px;
-  margin: 0 auto;
-}
-.install-box h3 {
-  font-size: 1.1rem;
-  margin-bottom: 20px;
-  color: var(--text);
-}
-.code-block {
-  background: rgba(6, 6, 7, 0.8);
-  border: 1px solid var(--panel-border);
-  border-radius: var(--radius-sm);
-  padding: 16px;
-  font-family: monospace;
-  font-size: 0.9rem;
-  color: var(--text-dim);
-  word-break: break-all;
-  margin-bottom: 16px;
-  overflow-x: auto;
-}
-.copy-btn {
-  appearance: none;
-  background: var(--panel);
-  border: 1px solid var(--panel-border);
-  color: var(--text);
-  padding: 10px 20px;
-  border-radius: var(--radius-sm);
-  cursor: pointer;
-  font-size: 0.9rem;
-  font-weight: 600;
-  transition: all 0.25s ease;
-}
-.copy-btn:hover {
-  border-color: var(--accent);
-  background: rgba(61, 125, 252, 0.1);
-}
-
-footer {
-  border-top: 1px solid var(--panel-border);
-  padding: 40px 0;
-  text-align: center;
-  color: var(--text-faint);
-  font-size: 0.9rem;
-  position: relative;
-  z-index: 1;
-}
-footer p { margin: 4px 0; }
 
 .mobile-warning {
   position: fixed;
   inset: 0;
-  background: var(--bg);
+  background: var(--bg-primary);
   display: none;
   align-items: center;
   justify-content: center;
   z-index: 200;
   text-align: center;
   padding: 20px;
+  flex-direction: column;
+  gap: 20px;
 }
-.mobile-warning.show { display: flex; flex-direction: column; gap: 20px; }
-.mobile-warning p { color: var(--text-dim); max-width: 300px; }
+
+.mobile-warning p {
+  color: var(--text-secondary);
+  max-width: 300px;
+}
+
+.mobile-warning p:last-child {
+  font-size: 0.85rem;
+  color: var(--text-tertiary);
+}
 
 @media (orientation: portrait) {
-  body > :not(.mobile-warning) { display: none; }
-  .mobile-warning { display: flex; }
+  body > :not(.mobile-warning) {
+    display: none;
+  }
+  .mobile-warning {
+    display: flex;
+  }
 }
 
-@media (max-width: 720px) {
-  .nav { flex-direction: column; gap: 12px; }
-  .nav-actions { width: 100%; justify-content: center; }
-  .hero { padding: 160px 0 80px; }
-  .hero-buttons { flex-direction: column; }
-  .btn { width: 100%; }
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 70px;
+  background: rgba(13, 13, 13, 0.85);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--glass-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
+  z-index: 100;
+}
+
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: var(--text-primary);
+}
+
+.nav-logo {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.nav-links {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.nav-link {
+  appearance: none;
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 8px 16px;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  font-family: 'Inter', sans-serif;
+}
+
+.nav-link:hover {
+  color: var(--text-primary);
+}
+
+main {
+  position: relative;
+  z-index: 1;
+  margin-top: 70px;
+}
+
+section {
+  padding: 100px 40px;
+  max-width: 1400px;
+  margin: 0 auto;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.7s ease-out forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+section:nth-child(1) { animation-delay: 0s; }
+section:nth-child(2) { animation-delay: 0.05s; }
+section:nth-child(3) { animation-delay: 0.1s; }
+section:nth-child(4) { animation-delay: 0.15s; }
+
+.hero {
+  text-align: center;
+  padding: 140px 40px 80px;
+}
+
+.hero-title {
+  font-size: clamp(3rem, 8vw, 4.5rem);
+  font-weight: 700;
+  line-height: 1.1;
+  margin-bottom: 20px;
+  letter-spacing: -0.02em;
+}
+
+.hero-subtitle {
+  font-size: 1.2rem;
+  color: var(--text-secondary);
+  margin-bottom: 40px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn {
+  appearance: none;
+  border: none;
+  padding: 12px 28px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: 'Inter', sans-serif;
+  background: var(--glass-light);
+  border: 1px solid var(--glass-border);
+  color: var(--text-primary);
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.btn-primary {
+  background: var(--accent);
+  border: 1px solid var(--accent);
+  color: white;
+}
+
+.btn-primary:hover {
+  background: var(--accent-light);
+  border-color: var(--accent-light);
+}
+
+.section-title {
+  font-size: clamp(2rem, 6vw, 3.2rem);
+  font-weight: 700;
+  margin-bottom: 12px;
+  text-align: center;
+  letter-spacing: -0.02em;
+}
+
+.section-desc {
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 1.05rem;
+  margin-bottom: 50px;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.feature-card {
+  background: var(--glass-light);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  padding: 32px;
+  transition: all 0.2s ease;
+}
+
+.feature-card:hover {
+  border-color: rgba(255, 255, 255, 0.12);
+  transform: translateY(-2px);
+}
+
+.feature-card h3 {
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: var(--text-primary);
+}
+
+.feature-card p {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.ui-section {
+  padding: 80px 40px;
+}
+
+.ui-container {
+  position: relative;
+  width: 100%;
+  max-width: 950px;
+  margin: 0 auto;
+}
+
+.ui-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 8px;
+  object-fit: contain;
+}
+
+.install-box {
+  background: var(--glass-light);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  padding: 40px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.install-box h3 {
+  font-size: 1.1rem;
+  margin-bottom: 20px;
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.code-block {
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid var(--glass-border);
+  border-radius: 8px;
+  padding: 16px;
+  font-family: 'Courier New', monospace;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  word-break: break-all;
+  margin-bottom: 16px;
+  overflow-x: auto;
+}
+
+.copy-btn {
+  appearance: none;
+  background: var(--glass-light);
+  border: 1px solid var(--glass-border);
+  color: var(--text-primary);
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  font-family: 'Inter', sans-serif;
+}
+
+.copy-btn:hover {
+  border-color: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+footer {
+  border-top: 1px solid var(--glass-border);
+  padding: 40px;
+  text-align: center;
+  color: var(--text-tertiary);
+  font-size: 0.9rem;
+  position: relative;
+  z-index: 1;
+}
+
+footer a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+footer a:hover {
+  color: var(--text-primary);
+}
+
+footer p {
+  margin: 6px 0;
+}
+
+@media (max-width: 768px) {
+  nav {
+    padding: 0 20px;
+  }
+
+  section {
+    padding: 60px 20px;
+  }
+
+  .hero {
+    padding: 100px 20px 40px;
+  }
+
+  .hero-title {
+    font-size: 2.5rem;
+  }
+
+  .hero-buttons {
+    flex-direction: column;
+  }
+
+  .btn {
+    width: 100%;
+  }
+
+  .nav-links {
+    flex-direction: column;
+    gap: 4px;
+  }
 }
 </style>
 </head>
@@ -359,201 +403,98 @@ footer p { margin: 4px 0; }
 
 <div class="mobile-warning">
   <p>Please rotate your device to landscape mode to access this site.</p>
-  <p style="font-size: 0.85rem; color: var(--text-faint);">This application is designed for desktop use only.</p>
+  <p>This application is designed for desktop use only.</p>
 </div>
 
-<nav class="nav">
+<nav>
   <a class="nav-brand" href="#">
     <img class="nav-logo" src="AppIcon.png" alt="Prism">
-    <span class="nav-brand-name">prism</span>
+    <span>prism</span>
   </a>
-  <div class="nav-actions">
-    <a href="#features" class="nav-btn">features</a>
-    <a href="#install" class="nav-btn">install</a>
-    <a href="https://discord.gg/5hjeaF3Uj" target="_blank" rel="noreferrer" class="nav-btn">discord</a>
+  <div class="nav-links">
+    <a href="#features" class="nav-link">features</a>
+    <a href="#interface" class="nav-link">interface</a>
+    <a href="#install" class="nav-link">install</a>
+    <a href="https://discord.gg/5hjeaF3Uj" target="_blank" rel="noreferrer" class="nav-link">discord</a>
   </div>
 </nav>
 
-<section class="hero">
-  <div class="container">
+<main>
+  <section class="hero">
     <h1 class="hero-title">Prism</h1>
     <p class="hero-subtitle">A MacOS External for Roblox.</p>
     <div class="hero-buttons">
-      <button class="btn btn-primary">Get Started</button>
-      <button class="btn">Learn More</button>
+      <a href="https://docs.getprism.lol" target="_blank" rel="noreferrer" class="btn btn-primary">Docs</a>
     </div>
-  </div>
-</section>
+  </section>
 
-<section class="features" id="features">
-  <div class="container">
-    <div class="features-header">
-      <h2 class="section-title">Features</h2>
-    </div>
+  <section id="features">
+    <h2 class="section-title">Features</h2>
     <div class="features-grid">
-      <article class="feature-card reveal">
-        <h3>ESP</h3>
-        <p>See players through walls with health bars, distance labels, tracers and name tags.</p>
-      </article>
-      <article class="feature-card reveal">
-        <h3>Aimbot</h3>
-        <p>Advanced targeting with customizable FOV radius and smoothness settings.</p>
-      </article>
-      <article class="feature-card reveal">
+      <div class="feature-card">
+        <h3>ESP & Aimbot</h3>
+        <p>See through walls and lock onto targets.</p>
+      </div>
+      <div class="feature-card">
         <h3>Local Player</h3>
-        <p>Adjust walkspeed, jump power, gravity, and enable noclip for exploration.</p>
-      </article>
-      <article class="feature-card reveal">
+        <p>Change walkspeed, jump height, gravity, and enable noclip mode.</p>
+      </div>
+      <div class="feature-card">
         <h3>Server Tools</h3>
-        <p>Server hop instantly, rejoin current game, find populated servers, or join by job ID.</p>
-      </article>
-      <article class="feature-card reveal">
-        <h3>FFlags</h3>
-        <p>Access Roblox feature flags with automatic ClientAppSettings.json generation.</p>
-      </article>
-      <article class="feature-card reveal">
-        <h3>Game Info</h3>
-        <p>View place ID, job ID, player count, server region, and game version in real time.</p>
-      </article>
-      <article class="feature-card reveal">
-        <h3>Profiles</h3>
-        <p>Save and load configuration profiles, export and import settings.</p>
-      </article>
-      <article class="feature-card reveal">
-        <h3>Console</h3>
-        <p>Integrated command console for automation, debugging, and advanced control.</p>
-      </article>
-      <article class="feature-card reveal">
-        <h3>Color Picker</h3>
-        <p>Customize colors for ESP boxes, aimbot circles, and team-based targeting.</p>
-      </article>
-      <article class="feature-card reveal">
-        <h3>Anti-AFK</h3>
-        <p>Automatic protection against idle disconnections to keep you in game longer.</p>
-      </article>
-      <article class="feature-card reveal">
-        <h3>Monitoring</h3>
-        <p>Live status indicators, activity logs, uptime tracking, and connection state.</p>
-      </article>
-      <article class="feature-card reveal">
-        <h3>Visual Tweaks</h3>
-        <p>Fullbright rendering, custom fonts, flat skies, and texture quality overrides.</p>
-      </article>
+        <p>Jump between servers, rejoin games, and connect to specific job IDs.</p>
+      </div>
+      <div class="feature-card">
+        <h3>Settings & Profiles</h3>
+        <p>Save your setup, manage colors, and customize Prism.</p>
+      </div>
+      <div class="feature-card">
+        <h3>FFlags & Console</h3>
+        <p>Access Roblox flags, run commands, and get real-time game information.</p>
+      </div>
+      <div class="feature-card">
+        <h3>Visual</h3>
+        <p>Fullbright, custom fonts, flat skies, and texture quality overrides.</p>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section class="comparison" id="comparison">
-  <div class="container">
-    <div class="comparison-header">
-      <h2 class="section-title">Why Prism</h2>
+  <section id="interface" class="ui-section">
+    <h2 class="section-title">Interface</h2>
+    <p class="section-desc">Clean, modern interface built natively for macOS.</p>
+    <div class="ui-container">
+      <img class="ui-image" src="ui.png" alt="Prism Interface">
     </div>
-    <table class="comparison-table reveal">
-      <thead>
-        <tr>
-          <th>Feature</th>
-          <th>Prism</th>
-          <th>Others</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>ESP</td>
-          <td><span class="check">Yes</span></td>
-          <td><span class="cross">Varies</span></td>
-        </tr>
-        <tr>
-          <td>Aimbot</td>
-          <td><span class="check">Yes</span></td>
-          <td><span class="cross">Limited</span></td>
-        </tr>
-        <tr>
-          <td>FFlag Management</td>
-          <td><span class="check">Yes</span></td>
-          <td><span class="cross">No</span></td>
-        </tr>
-        <tr>
-          <td>Profile System</td>
-          <td><span class="check">Yes</span></td>
-          <td><span class="check">Yes</span></td>
-        </tr>
-        <tr>
-          <td>Command Console</td>
-          <td><span class="check">Yes</span></td>
-          <td><span class="cross">No</span></td>
-        </tr>
-        <tr>
-          <td>Server Tools</td>
-          <td><span class="check">Yes</span></td>
-          <td><span class="check">Varies</span></td>
-        </tr>
-        <tr>
-          <td>Custom Fonts</td>
-          <td><span class="check">Yes</span></td>
-          <td><span class="cross">No</span></td>
-        </tr>
-        <tr>
-          <td>Real Time Stats</td>
-          <td><span class="check">Yes</span></td>
-          <td><span class="cross">Limited</span></td>
-        </tr>
-        <tr>
-          <td>Active Development</td>
-          <td><span class="check">Yes</span></td>
-          <td><span class="cross">Varies</span></td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</section>
+  </section>
 
-<section class="install" id="install">
-  <div class="container">
-    <div class="install-header">
-      <h2 class="section-title">Installation</h2>
-    </div>
-    <div class="install-box reveal">
-      <h3>macOS Only</h3>
-      <div class="code-block">Prism is still in development</div>
+  <section id="install">
+    <h2 class="section-title">Installation</h2>
+    <p class="section-desc">Get started in seconds with a single command.</p>
+    <div class="install-box">
+      <h3>macOS</h3>
+      <div class="code-block">Prism is still in development.</div>
       <button class="copy-btn">copy</button>
     </div>
-  </div>
-</section>
+  </section>
+</main>
 
 <footer>
-  <div class="container">
-    <p><a href="https://armorixteam.xyz" target="_blank" rel="noreferrer" style="color: var(--accent); text-decoration: none;">armorixteam.xyz</a></p>
-    <p>Use at your own risk. Prism is not affiliated with Roblox Corporation.</p>
-  </div>
+    <p>&copy; 2026 prism. All rights reserved.</p>
+  <p>Use at your own risk. Prism is not affiliated with Roblox Corporation.</p>
+  <p style="font-size: 0.75rem; color: var(--text-tertiary); margin-top: 12px;">For legal or DMCA inquiries, contact nyxolz@proton.me</p>
 </footer>
 
 <script>
-function setupReveal() {
-  const items = document.querySelectorAll('.reveal');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.15 });
-  items.forEach((item) => observer.observe(item));
-}
-
-document.querySelectorAll('.copy-btn').forEach(btn => {
-  btn.addEventListener('click', function() {
-    const codeBlock = this.previousElementSibling;
-    const code = codeBlock.textContent.trim();
-    navigator.clipboard.writeText(code).then(() => {
-      const original = this.textContent;
-      this.textContent = 'copied';
-      setTimeout(() => { this.textContent = original; }, 2000);
+  document.querySelectorAll('.copy-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      const codeBlock = this.previousElementSibling;
+      const code = codeBlock.textContent.trim();
+      navigator.clipboard.writeText(code).then(() => {
+        const original = this.textContent;
+        this.textContent = 'copied';
+        setTimeout(() => { this.textContent = original; }, 2000);
+      });
     });
   });
-});
-
-document.addEventListener('DOMContentLoaded', setupReveal);
 </script>
 
 </body>
