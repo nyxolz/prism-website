@@ -372,6 +372,129 @@ footer p {
     gap: 4px;
   }
 }
+
+.tos-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(8px);
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+.tos-overlay.open {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.tos-modal {
+  background: #111111;
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  width: 100%;
+  max-width: 780px;
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transform: translateY(12px);
+  transition: transform 0.2s ease;
+}
+
+.tos-overlay.open .tos-modal {
+  transform: translateY(0);
+}
+
+.tos-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 28px;
+  border-bottom: 1px solid var(--glass-border);
+  flex-shrink: 0;
+}
+
+.tos-modal-header h2 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.tos-modal-header span {
+  font-size: 0.8rem;
+  color: var(--text-tertiary);
+}
+
+.tos-close {
+  appearance: none;
+  background: transparent;
+  border: none;
+  color: var(--text-tertiary);
+  cursor: pointer;
+  font-size: 1.3rem;
+  line-height: 1;
+  padding: 4px 8px;
+  border-radius: 6px;
+  transition: color 0.15s ease;
+  font-family: 'Inter', sans-serif;
+}
+
+.tos-close:hover {
+  color: var(--text-primary);
+}
+
+.tos-body {
+  overflow-y: auto;
+  padding: 28px;
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  line-height: 1.7;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,0.08) transparent;
+}
+
+.tos-body::-webkit-scrollbar {
+  width: 4px;
+}
+
+.tos-body::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.08);
+  border-radius: 2px;
+}
+
+.tos-body p {
+  margin-bottom: 16px;
+}
+
+.tos-body a {
+  color: var(--accent-light);
+  text-decoration: none;
+}
+
+.tos-body a:hover {
+  text-decoration: underline;
+}
+
+footer a.tos-trigger {
+  color: var(--text-tertiary);
+  text-decoration: none;
+  transition: color 0.2s ease;
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+}
+
+footer a.tos-trigger:hover {
+  color: var(--text-primary);
+}
 </style>
 </head>
 <body>
@@ -422,10 +545,45 @@ footer p {
 </main>
 
 <footer>
-    <p>&copy; 2026 prism. All rights reserved.</p>
+  <p>&copy; 2026 prism. All rights reserved.</p>
   <p>Use at your own risk. Prism is not affiliated with Roblox Corporation.</p>
   <p style="font-size: 0.75rem; color: var(--text-tertiary); margin-top: 12px;">For legal or DMCA inquiries, contact nyxolz@proton.me</p>
+  <p style="margin-top: 12px;"><a class="tos-trigger" onclick="document.getElementById('tosOverlay').classList.add('open')">Terms of Service</a></p>
 </footer>
+
+<div class="tos-overlay" id="tosOverlay" onclick="if(event.target===this)this.classList.remove('open')">
+  <div class="tos-modal">
+    <div class="tos-modal-header">
+      <h2>Terms of Service</h2>
+      <span>Updated Sep 10 2026</span>
+      <button class="tos-close" onclick="document.getElementById('tosOverlay').classList.remove('open')">✕</button>
+    </div>
+    <div class="tos-body">
+      <p>By accessing or using Prism ("the Software", "we", "us"), you agree to be bound by these Terms of Service. If you do not agree, do not use the Software. We reserve the right to update these terms at any time. Continued use after changes are posted constitutes acceptance of the revised terms.</p>
+
+      <p>Prism is provided free of charge as a personal project. We are not a registered business or legal entity. Nothing in these terms creates or implies a commercial relationship between you and Prism.</p>
+
+      <p>THE SOFTWARE IS PROVIDED "AS IS" AND "AS AVAILABLE," WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT. WE DO NOT WARRANT THAT THE SOFTWARE WILL BE ERROR-FREE, UNINTERRUPTED, SECURE, OR FREE OF VIRUSES OR OTHER HARMFUL COMPONENTS. YOUR USE OF THE SOFTWARE IS ENTIRELY AT YOUR OWN RISK.</p>
+
+      <p>TO THE FULLEST EXTENT PERMITTED BY APPLICABLE LAW, IN NO EVENT SHALL PRISM, ITS CONTRIBUTORS, OR ANYONE ASSOCIATED WITH THE PROJECT BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, EXEMPLARY, OR PUNITIVE DAMAGES ARISING OUT OF OR IN CONNECTION WITH YOUR USE OF OR INABILITY TO USE THE SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGES. THIS LIMITATION APPLIES REGARDLESS OF THE LEGAL THEORY ASSERTED, INCLUDING CONTRACT, TORT, NEGLIGENCE, STRICT LIABILITY, OR OTHERWISE.</p>
+
+      <p>You agree to use the Software only in accordance with all applicable local, state, national, and international laws and regulations. You are solely responsible for ensuring that your use of the Software complies with the terms of service of any third-party platforms, including but not limited to Roblox Corporation. Prism is not affiliated with, endorsed by, or in any way officially connected to Roblox Corporation. Use of this Software in connection with any third-party platform is entirely at your own risk.</p>
+
+      <p>You agree, to the fullest extent permitted by law, to indemnify, defend, and hold harmless Prism and any individuals associated with the project from and against any and all claims, damages, losses, liabilities, costs, and expenses (including reasonable legal fees) arising out of or relating to your use of the Software, your violation of these Terms, or your violation of any rights of a third party.</p>
+
+      <p>Any dispute arising out of or relating to these Terms or the Software shall be resolved on an individual basis. You waive any right to bring or participate in any class action, collective action, or representative proceeding against Prism or any individuals associated with the project.</p>
+
+      <p>We respect the intellectual property rights of others. If you believe that any content made available through or in connection with Prism infringes a copyright you own or control, please send a written notice to <a href="mailto:nyxolz@proton.me">nyxolz@proton.me</a>. Your notice must include: a description of the copyrighted work you claim has been infringed; a description of where the allegedly infringing material is located; your contact information; a statement that you have a good-faith belief that the use is not authorized by the copyright owner; and a statement, under penalty of perjury, that the information in your notice is accurate and that you are the copyright owner or authorized to act on their behalf. We will respond to valid notices and take appropriate action.</p>
+
+      <p>We reserve the right to suspend or terminate access to the Software at any time, for any reason, without notice or liability.</p>
+
+      <p>These Terms constitute the entire agreement between you and Prism regarding your use of the Software and supersede all prior agreements, representations, and understandings. If any provision of these Terms is found to be unenforceable, the remaining provisions will continue in full force and effect. Our failure to enforce any provision does not constitute a waiver of our right to do so in the future.</p>
+
+      <p>For legal or DMCA inquiries: <a href="mailto:nyxolz@proton.me">nyxolz@proton.me</a></p>
+
+    </div>
+  </div>
+</div>
 
 <script>
   document.querySelectorAll('.copy-btn').forEach(btn => {
