@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="/AppIcon.png" type="image/png">
+<meta name="description" content="The official Prism Software License Agreement">
+<meta name="theme-color" content="#0d0d0d">
+<title>Prism — License Agreement</title>
+<link rel="canonical" href="https://getprism.lol/license">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Prism">
+<meta property="og:title" content="Prism — License Agreement">
+<meta property="og:description" content="The official Prism Software License Agreement">
+<meta property="og:url" content="https://getprism.lol/license">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg-primary: #0d0d0d;
+  --glass-light: rgba(255, 255, 255, 0.02);
+  --glass-border: rgba(255, 255, 255, 0.06);
+  --text-primary: #ffffff;
+  --text-secondary: #999999;
+  --text-tertiary: #555555;
+  --accent: #2f6feb;
+  --accent-light: #4483f6;
+  --radius: 14px;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  overflow-x: hidden;
+  position: relative;
+  min-height: 100vh;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at 50% 0%, rgba(47, 111, 235, 0.025), transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 70px;
+  background: rgba(13, 13, 13, 0.85);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--glass-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
+  z-index: 100;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: var(--text-primary);
+}
+
+.brand img {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+header nav {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+header nav a {
+  appearance: none;
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 8px 16px;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  font-family: 'Inter', sans-serif;
+}
+
+header nav a:hover {
+  color: var(--text-primary);
+}
+
+main {
+  position: relative;
+  z-index: 1;
+  margin-top: 70px;
+}
+
+section {
+  padding: 100px 40px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+section > h1 {
+  font-size: clamp(2rem, 6vw, 3.2rem);
+  font-weight: 700;
+  margin-bottom: 12px;
+  text-align: center;
+  letter-spacing: -0.02em;
+}
+
+ol { list-style: none; padding: 0; }
+
+li {
+  padding: 26px 0 30px;
+  border-top: 1px solid var(--glass-border);
+}
+li:first-child { padding-top: 0; border-top: 0; }
+
+li h2 {
+  margin: 0 0 6px;
+  font-size: 1.4rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+li p {
+  color: var(--text-secondary);
+  font-weight: 500;
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+li a {
+  color: var(--text-primary);
+  text-decoration: underline;
+  text-decoration-color: rgba(242,242,244,0.35);
+  text-underline-offset: 0.2em;
+  transition: text-decoration-color 0.15s;
+}
+li a:hover { text-decoration-color: var(--text-primary); }
+
+footer {
+  border-top: 1px solid var(--glass-border);
+  padding: 40px;
+  text-align: center;
+  color: var(--text-tertiary);
+  font-size: 0.9rem;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+
+footer a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+footer a:hover {
+  color: var(--text-primary);
+}
+
+footer p {
+  margin: 6px 0;
+}
+
+.footer-fade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent, var(--bg-primary));
+  pointer-events: none;
+  z-index: -1;
+}
+
+@media (max-width: 768px) {
+  header {
+    padding: 0 20px;
+  }
+
+  section {
+    padding: 60px 20px;
+  }
+
+  section > h1 {
+    font-size: 2rem;
+    margin-bottom: 52px;
+  }
+
+  li h2 {
+    font-size: 1.15rem;
+  }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <a class="brand" href="/">
+    <img src="AppIcon.png" alt="">
+    <span>prism</span>
+  </a>
+  <nav>
+    <a href="https://discord.gg/5hjeaF3Uj" target="_blank" rel="noopener">discord</a>
+  </nav>
+</header>
+
+<main>
+  <section>
+    <h1>License</h1>
+    <article>
+      <ol>
+        <li>
+          <h2>License grant</h2>
+          <p>Prism is proprietary software. This agreement grants you a limited, personal, non-transferable, non-sublicensable license to use an unmodified copy of Prism for its intended purpose.</p>
+        </li>
+        <li>
+          <h2>Restrictions</h2>
+          <p>You may not copy, redistribute, resell, sublicense, publish, modify, or create derivative works from Prism. You may not reverse engineer, decompile, disassemble, deobfuscate, inspect, trace, analyze, or extract implementation details, logic, offsets, algorithms, protocols, data, or design from Prism. You may not bypass or interfere with its seal, integrity checks, licensing notices, access controls, or anti-tamper protections.</p>
+        </li>
+        <li>
+          <h2>Automated analysis</h2>
+          <p>You may not use automated systems or artificial-intelligence tools to perform or assist with any prohibited activity. You may not direct or assist another person, tool, model, or agent to perform a prohibited activity. You may not use knowledge derived from Prism to create, improve, or assist a competing product.</p>
+        </li>
+        <li>
+          <h2>Ownership</h2>
+          <p>Prism and all associated intellectual property remain the exclusive property of its creators. No ownership rights are transferred under this agreement.</p>
+        </li>
+        <li>
+          <h2>Termination</h2>
+          <p>This license terminates automatically if you violate its terms. Upon termination, you must stop using Prism and destroy every copy in your possession or control.</p>
+        </li>
+        <li>
+          <h2>Warranty</h2>
+          <p>Prism is provided "as is," without warranties of any kind.</p>
+        </li>
+        <li>
+          <h2>Liability</h2>
+          <p>To the maximum extent permitted by applicable law, the creators of Prism are not liable for any damages arising from its use or inability to be used.</p>
+        </li>
+        <li>
+          <h2>Applicability</h2>
+          <p>These restrictions apply except where applicable law expressly provides otherwise. If the bundled copy of this license is unavailable, the authoritative copy is published at <a href="https://getprism.lol/license">getprism.lol/license</a>. An unavailable bundled copy does not grant additional rights or permission.</p>
+        </li>
+      </ol>
+    </article>
+  </section>
+</main>
+
+<footer>
+  <div class="footer-fade"></div>
+  <p>&copy; Prism</p>
+  <p>ty saba for helping with anti-ai i kinda just took it but she helped me understand a lot</p>
+</footer>
+
+</body>
+</html>
