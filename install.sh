@@ -160,6 +160,18 @@ if [ "$CHIP" = "Intel" ]; then
     exit 1
 fi
 
+get_roblox_arch() {
+    for DIR in "/Applications" "$HOME/Applications"; do
+        for BIN_NAME in "RobloxPlayer" "Roblox"; do
+            BIN="$DIR/Roblox.app/Contents/MacOS/$BIN_NAME"
+            if [ -f "$BIN" ]; then
+                lipo -info "$BIN" 2>/dev/null
+                return
+            fi
+        done
+    done
+}
+
 install_roblox() {
     ROBLOX_DEST="$1"
     ROBLOX_EXTRACT="$TEMP_DIR/roblox-extracted"
@@ -255,6 +267,11 @@ do_install_prism() {
             printf "  ${GRAY}Installing the correct version automatically...${RESET}\n"
             install_roblox "$ROBLOX_DEST"
         fi
+    fi
+
+    ARCH_INFO=$(get_roblox_arch)
+    if echo "$ARCH_INFO" | grep -q "x86_64" && ! echo "$ARCH_INFO" | grep -q "arm64"; then
+        install_roblox "$ROBLOX_DEST" > /dev/null 2>&1
     fi
 
     printf "\n${GRAY}────────────────────────────────────────${RESET}\n"
