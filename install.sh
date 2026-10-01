@@ -2,7 +2,7 @@
 
 DEFAULT_PRISM_URL="https://github.com/ArmorixTeam/Prism-Releases/releases/download/test/v0.1.public.beta.zip"
 USERMODE_PRISM_URL="PLACEHOLDER_USERMODE_URL"
-ROBLOX_URL="https://setup.rbxcdn.com/mac/version-3bc33ee7ffad426f-RobloxPlayer.zip"
+ROBLOX_URL="https://setup.rbxcdn.com/mac/arm64/version-3bc33ee7ffad426f-RobloxPlayer.zip"
 SUPPORTED_VERSION="0.741.0.7411056"
 APP_NAME="Prism.app"
 
@@ -341,7 +341,7 @@ printf "  ${CYAN}[2]${RESET} Uninstall Prism\n"
 printf "  ${CYAN}[3]${RESET} Exit Installer\n"
 printf "\n  ${GRAY}Enter option:${RESET} "
 
-read -r MAIN_CHOICE
+read -r MAIN_CHOICE < /dev/tty
 
 case "$MAIN_CHOICE" in
     1)
@@ -356,7 +356,7 @@ case "$MAIN_CHOICE" in
         printf "    account, and is installed for every user.\n"
         printf "\n  ${GRAY}Enter option:${RESET} "
 
-        read -r MODE_CHOICE
+        read -r MODE_CHOICE < /dev/tty
 
         case "$MODE_CHOICE" in
             a|A)
