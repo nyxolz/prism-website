@@ -134,7 +134,7 @@ ${BOLD}Contributors:${RESET}
 ${CYAN}•${RESET} imeowforcash  github.com/imeowforcash
 
 ${BOLD}Prism:${RESET}
-${CYAN}•${RESET} v0.1 Public Beta
+${CYAN}•${RESET} v1.0 Public Beta
 
 ${BOLD}System:${RESET}
 ${CYAN}•${RESET} macOS $MACOS
