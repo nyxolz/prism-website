@@ -140,6 +140,9 @@ ${BOLD}System:${RESET}
 ${CYAN}•${RESET} macOS $MACOS
 ${CYAN}•${RESET} $CHIP
 ${CYAN}•${RESET} $MODEL
+
+${BOLD}Discord:${RESET}
+${CYAN}•${RESET} discord.gg/prismmacos
 EOF
 )
 
@@ -150,6 +153,12 @@ paste \
 
 echo ""
 printf "${GRAY}────────────────────────────────────────${RESET}\n"
+
+if [ "$CHIP" = "Intel" ]; then
+    printf "\n  ${RED}✗${RESET} ${BOLD}Intel is not supported yet.${RESET}\n"
+    printf "    Join our Discord for more info! ${CYAN}discord.gg/prismmacos${RESET}\n\n"
+    exit 1
+fi
 
 install_roblox() {
     ROBLOX_DEST="$1"
