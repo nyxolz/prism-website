@@ -51,27 +51,18 @@ download() {
     URL="$1"
     DEST="$2"
 
-    printf "  "
-
     curl \
         -L \
         --fail \
-        --progress-bar \
+        -# \
         "$URL" \
         -o "$DEST" \
-        2>&1 \
-        | while IFS= read -r LINE; do
-            PERCENT=$(echo "$LINE" | grep -o '[0-9]*\.[0-9]' | head -1 | cut -d. -f1)
-            if [ -n "$PERCENT" ]; then
-                bar "$PERCENT"
-            fi
-        done
+        2>/dev/tty
 
-    if [ "${PIPESTATUS[0]}" -ne 0 ] 2>/dev/null || [ ! -f "$DEST" ] || [ ! -s "$DEST" ]; then
+    if [ $? -ne 0 ] || [ ! -s "$DEST" ]; then
         return 1
     fi
 
-    bar 100
     return 0
 }
 
@@ -258,13 +249,6 @@ do_install_prism() {
     fi
 
     printf "\n${GRAY}────────────────────────────────────────${RESET}\n"
-
-    if [ -d "$INSTALL_DIR/$APP_NAME" ]; then
-        warn "Prism is already installed."
-        printf "  ${GRAY}Location:${RESET} $INSTALL_DIR/$APP_NAME\n"
-        echo ""
-        exit 0
-    fi
 
     printf "\n${BLUE}${BOLD}[1/3]${RESET} Downloading Prism\n\n"
 
