@@ -344,23 +344,22 @@ EOF
     codesign --remove-signature "$ROBLOX_APP_PATH" 2>/dev/null || \
         sudo codesign --remove-signature "$ROBLOX_APP_PATH"
 
-    codesign \
+     codesign \
         --force \
         --deep \
         --sign - \
         --entitlements "$ENTITLEMENTS_FILE" \
-        --options runtime \
         "$ROBLOX_APP_PATH" 2>/dev/null
-
+    
     if [ $? -ne 0 ]; then
         sudo codesign \
             --force \
             --deep \
             --sign - \
             --entitlements "$ENTITLEMENTS_FILE" \
-            --options runtime \
             "$ROBLOX_APP_PATH" || fail "Failed to sign Roblox"
-    fi
+    
+        fi
 
     success "Roblox signed"
 
