@@ -247,11 +247,18 @@ section:nth-child(3) { animation-delay: 0.1s; }
   padding: 80px 40px;
 }
 
-.ui-container {
-  position: relative;
-  width: 100%;
-  max-width: 950px;
+.ui-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  max-width: 1200px;
   margin: 0 auto;
+}
+
+.ui-item {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .ui-image {
@@ -262,12 +269,21 @@ section:nth-child(3) { animation-delay: 0.1s; }
   object-fit: contain;
 }
 
+.ui-label {
+  text-align: center;
+  color: var(--text-tertiary);
+  font-size: 0.85rem;
+}
+
 .ui-disclaimer {
   text-align: center;
   color: var(--text-tertiary);
   font-size: 0.9rem;
-  margin-top: 16px;
+  margin-top: 20px;
   font-style: italic;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .install-box {
@@ -370,6 +386,10 @@ footer p {
   .nav-links {
     flex-direction: column;
     gap: 4px;
+  }
+
+  .ui-grid {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -527,10 +547,17 @@ footer a.tos-trigger:hover {
 
   <section id="interface" class="ui-section">
     <h2 class="section-title">Interface</h2>
-    <div class="ui-container">
-      <img class="ui-image" src="ui.png" alt="Prism Interface">
-      <p class="ui-disclaimer">Note: This is not the final UI and may be subject to changes.</p>
+    <div class="ui-grid">
+      <div class="ui-item">
+        <img class="ui-image" src="ui.png" alt="Prism UI">
+        <span class="ui-label">UI</span>
+      </div>
+      <div class="ui-item">
+        <img class="ui-image" src="esp.png" alt="Prism ESP">
+        <span class="ui-label">ESP</span>
+      </div>
     </div>
+    <p class="ui-disclaimer">Note: This is not the final UI and may be subject to changes.</p>
   </section>
 
   <section id="install">
