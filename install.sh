@@ -133,7 +133,7 @@ ${CYAN}•${RESET} Armorix Team  github.com/armorixteam
 ${BOLD}Contributors:${RESET}
 ${CYAN}•${RESET} imeowforcash  github.com/imeowforcash
 
-${BOLD}Prism:${RESET}    
+${BOLD}Prism:${RESET}
 ${CYAN}•${RESET} v1.0 Public Beta
 
 ${BOLD}System:${RESET}
@@ -310,6 +310,8 @@ do_install_prism() {
         rm -rf "$INSTALL_DIR/$APP_NAME" 2>/dev/null || sudo rm -rf "$INSTALL_DIR/$APP_NAME"
     fi
 
+    chown -R "$(whoami)" "$APP_PATH"
+
     cp -R "$APP_PATH" "$INSTALL_DIR/$APP_NAME" 2>/dev/null
 
     if [ $? -ne 0 ]; then
@@ -318,7 +320,7 @@ do_install_prism() {
 
     success "Prism installed to $INSTALL_DIR"
 
-     printf "\n${BLUE}${BOLD}[4/5]${RESET} Signing Roblox\n\n"
+    printf "\n${BLUE}${BOLD}[4/5]${RESET} Signing Roblox\n\n"
 
     ENTITLEMENTS_FILE="$TEMP_DIR/entitlements.plist"
 
@@ -339,9 +341,15 @@ do_install_prism() {
 </plist>
 EOF
 
-    ROBLOX_APP_PATH="$ROBLOX_DEST/Roblox.app"
+    if [ -d "/Applications/Roblox.app" ]; then
+        ROBLOX_APP_PATH="/Applications/Roblox.app"
+    elif [ -d "$HOME/Applications/Roblox.app" ]; then
+        ROBLOX_APP_PATH="$HOME/Applications/Roblox.app"
+    else
+        fail "Roblox.app not found for signing"
+    fi
 
-    if [ "$ROBLOX_DEST" = "$HOME/Applications" ]; then
+    if [ "$ROBLOX_APP_PATH" = "$HOME/Applications/Roblox.app" ]; then
         codesign --remove-signature "$ROBLOX_APP_PATH" 2>/dev/null
         codesign --force --deep --sign - --entitlements "$ENTITLEMENTS_FILE" "$ROBLOX_APP_PATH" || fail "Failed to sign Roblox"
     else
@@ -353,8 +361,11 @@ EOF
 
     printf "\n${BLUE}${BOLD}[5/5]${RESET} Clearing quarantine\n\n"
 
-    xattr -cr "$INSTALL_DIR/$APP_NAME" 2>/dev/null || \
-        sudo xattr -cr "$INSTALL_DIR/$APP_NAME"
+    if [ "$INSTALL_DIR" = "$HOME/Applications" ]; then
+        xattr -cr "$INSTALL_DIR/$APP_NAME"
+    else
+        xattr -cr "$INSTALL_DIR/$APP_NAME" 2>/dev/null || sudo xattr -cr "$INSTALL_DIR/$APP_NAME"
+    fi
 
     success "Quarantine cleared"
 
