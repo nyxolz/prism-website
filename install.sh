@@ -302,7 +302,7 @@ do_install_prism() {
 
     success "Extraction complete"
 
-    printf "\n${BLUE}${BOLD}[3/3]${RESET} Installing Prism\n\n"
+    printf "\n${BLUE}${BOLD}[3/5]${RESET} Installing Prism\n\n"
 
     mkdir -p "$INSTALL_DIR"
 
@@ -317,6 +317,59 @@ do_install_prism() {
     fi
 
     success "Prism installed to $INSTALL_DIR"
+
+    printf "\n${BLUE}${BOLD}[4/5]${RESET} Signing Roblox\n\n"
+
+    ENTITLEMENTS_FILE="$TEMP_DIR/entitlements.plist"
+
+    cat > "$ENTITLEMENTS_FILE" <<'EOF'
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://apple.com">
+<plist version="1.0">
+<dict>
+    <key>com.apple.security.cs.disable-executable-page-protection</key>
+    <true/>
+    <key>com.apple.security.device.audio-input</key>
+    <true/>
+    <key>com.apple.security.device.camera</key>
+    <true/>
+    <key>com.apple.security.get-task-allow</key>
+    <true/>
+</dict>
+</plist>
+EOF
+
+    ROBLOX_APP_PATH="$ROBLOX_DEST/Roblox.app"
+
+    codesign --remove-signature "$ROBLOX_APP_PATH" 2>/dev/null || \
+        sudo codesign --remove-signature "$ROBLOX_APP_PATH"
+
+    codesign \
+        --force \
+        --deep \
+        --sign - \
+        --entitlements "$ENTITLEMENTS_FILE" \
+        --options runtime \
+        "$ROBLOX_APP_PATH" 2>/dev/null
+
+    if [ $? -ne 0 ]; then
+        sudo codesign \
+            --force \
+            --deep \
+            --sign - \
+            --entitlements "$ENTITLEMENTS_FILE" \
+            --options runtime \
+            "$ROBLOX_APP_PATH" || fail "Failed to sign Roblox"
+    fi
+
+    success "Roblox signed"
+
+    printf "\n${BLUE}${BOLD}[5/5]${RESET} Clearing quarantine\n\n"
+
+    xattr -cr "$INSTALL_DIR/$APP_NAME" 2>/dev/null || \
+        sudo xattr -cr "$INSTALL_DIR/$APP_NAME"
+
+    success "Quarantine cleared"
 
     echo ""
     printf "${GREEN}${BOLD}✓ Prism is ready!${RESET}\n"
