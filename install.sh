@@ -47,6 +47,34 @@ bar() {
     printf "\r  ${CYAN}${BAR}${RESET} %s%%" "$PERCENT"
 }
 
+download() {
+    URL="$1"
+    DEST="$2"
+
+    printf "  "
+
+    curl \
+        -L \
+        --fail \
+        --progress-bar \
+        "$URL" \
+        -o "$DEST" \
+        2>&1 \
+        | while IFS= read -r LINE; do
+            PERCENT=$(echo "$LINE" | grep -o '[0-9]*\.[0-9]' | head -1 | cut -d. -f1)
+            if [ -n "$PERCENT" ]; then
+                bar "$PERCENT"
+            fi
+        done
+
+    if [ "${PIPESTATUS[0]}" -ne 0 ] 2>/dev/null || [ ! -f "$DEST" ] || [ ! -s "$DEST" ]; then
+        return 1
+    fi
+
+    bar 100
+    return 0
+}
+
 success() {
     printf "\n  ${GREEN}✓${RESET} $1\n"
 }
@@ -138,16 +166,8 @@ install_roblox() {
 
     printf "\n${BLUE}${BOLD}[!]${RESET} Downloading Roblox $SUPPORTED_VERSION\n\n"
 
-    curl \
-        -L \
-        --fail \
-        -s \
-        "$ROBLOX_URL" \
-        -o "$ROBLOX_ZIP" \
-        2>/dev/null \
-        || fail "Failed to download Roblox"
+    download "$ROBLOX_URL" "$ROBLOX_ZIP" || fail "Failed to download Roblox"
 
-    bar 100
     success "Roblox download complete"
 
     printf "\n${BLUE}${BOLD}[!]${RESET} Extracting Roblox\n\n"
@@ -156,8 +176,6 @@ install_roblox() {
 
     ditto -x -k "$ROBLOX_ZIP" "$ROBLOX_EXTRACT" \
         || fail "Could not extract Roblox zip"
-
-    bar 100
 
     ROBLOX_APP=$(find "$ROBLOX_EXTRACT" -name "RobloxPlayer.app" -type d -print -quit)
 
@@ -183,7 +201,6 @@ install_roblox() {
         sudo cp -R "$ROBLOX_APP" "$ROBLOX_DEST/Roblox.app" || fail "Failed to install Roblox"
     fi
 
-    bar 100
     success "Roblox installed to $ROBLOX_DEST"
 
     INSTALLED_VERSION=$(defaults read "$ROBLOX_DEST/Roblox.app/Contents/Info" CFBundleShortVersionString 2>/dev/null)
@@ -251,16 +268,8 @@ do_install_prism() {
 
     printf "\n${BLUE}${BOLD}[1/3]${RESET} Downloading Prism\n\n"
 
-    curl \
-        -L \
-        --fail \
-        -s \
-        "$PRISM_URL" \
-        -o "$ZIP_FILE" \
-        2>/dev/null \
-        || fail "Download failed"
+    download "$PRISM_URL" "$ZIP_FILE" || fail "Download failed"
 
-    bar 100
     success "Download complete"
 
     printf "\n${BLUE}${BOLD}[2/3]${RESET} Extracting Prism\n\n"
@@ -276,8 +285,6 @@ do_install_prism() {
         ditto -x -k "$INNER" "$EXTRACT_DIR" \
             || fail "Could not extract application"
     fi
-
-    bar 100
 
     APP_PATH=$(find "$EXTRACT_DIR" -name "$APP_NAME" -type d -print -quit)
 
@@ -299,7 +306,6 @@ do_install_prism() {
         sudo cp -R "$APP_PATH" "$INSTALL_DIR/$APP_NAME" || fail "Installation failed"
     fi
 
-    bar 100
     success "Prism installed to $INSTALL_DIR"
 
     echo ""
