@@ -133,7 +133,7 @@ ${CYAN}•${RESET} Armorix Team  github.com/armorixteam
 ${BOLD}Contributors:${RESET}
 ${CYAN}•${RESET} imeowforcash  github.com/imeowforcash
 
-${BOLD}Prism:${RESET}
+${BOLD}Prism:${RESET}    
 ${CYAN}•${RESET} v1.0 Public Beta
 
 ${BOLD}System:${RESET}
@@ -318,7 +318,7 @@ do_install_prism() {
 
     success "Prism installed to $INSTALL_DIR"
 
-    printf "\n${BLUE}${BOLD}[4/5]${RESET} Signing Roblox\n\n"
+     printf "\n${BLUE}${BOLD}[4/5]${RESET} Signing Roblox\n\n"
 
     ENTITLEMENTS_FILE="$TEMP_DIR/entitlements.plist"
 
@@ -341,25 +341,13 @@ EOF
 
     ROBLOX_APP_PATH="$ROBLOX_DEST/Roblox.app"
 
-    codesign --remove-signature "$ROBLOX_APP_PATH" 2>/dev/null || \
-        sudo codesign --remove-signature "$ROBLOX_APP_PATH"
-
-     codesign \
-        --force \
-        --deep \
-        --sign - \
-        --entitlements "$ENTITLEMENTS_FILE" \
-        "$ROBLOX_APP_PATH" 2>/dev/null
-    
-    if [ $? -ne 0 ]; then
-        sudo codesign \
-            --force \
-            --deep \
-            --sign - \
-            --entitlements "$ENTITLEMENTS_FILE" \
-            "$ROBLOX_APP_PATH" || fail "Failed to sign Roblox"
-    
-        fi
+    if [ "$ROBLOX_DEST" = "$HOME/Applications" ]; then
+        codesign --remove-signature "$ROBLOX_APP_PATH" 2>/dev/null
+        codesign --force --deep --sign - --entitlements "$ENTITLEMENTS_FILE" "$ROBLOX_APP_PATH" || fail "Failed to sign Roblox"
+    else
+        codesign --remove-signature "$ROBLOX_APP_PATH" 2>/dev/null || sudo codesign --remove-signature "$ROBLOX_APP_PATH"
+        codesign --force --deep --sign - --entitlements "$ENTITLEMENTS_FILE" "$ROBLOX_APP_PATH" 2>/dev/null || sudo codesign --force --deep --sign - --entitlements "$ENTITLEMENTS_FILE" "$ROBLOX_APP_PATH" || fail "Failed to sign Roblox"
+    fi
 
     success "Roblox signed"
 
