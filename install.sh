@@ -1,7 +1,7 @@
 #!/bin/bash
 
-DEFAULT_PRISM_URL="https://github.com/ArmorixTeam/Prism-Releases/releases/download/v1.0-beta/v1.0-public-beta-default.zip"
-USERMODE_PRISM_URL="https://github.com/ArmorixTeam/Prism-Releases/releases/download/v1.0-beta/v1.0.public-beta-usermode.zip"
+DEFAULT_PRISM_URL="https://github.com/ArmorixTeam/Prism-Releases/releases/download/v1.0.1-beta/v1.0.1-public-beta-default.zip"
+USERMODE_PRISM_URL="https://github.com/ArmorixTeam/Prism-Releases/releases/download/v1.0.1-beta/v1.0.1-public-beta-usermode.zip"
 ROBLOX_URL="https://setup.rbxcdn.com/mac/arm64/version-3bc33ee7ffad426f-RobloxPlayer.zip"
 SUPPORTED_VERSION="0.741.0.7411056"
 APP_NAME="Prism.app"
@@ -134,7 +134,7 @@ ${BOLD}Contributors:${RESET}
 ${CYAN}•${RESET} imeowforcash  github.com/imeowforcash
 
 ${BOLD}Prism:${RESET}
-${CYAN}•${RESET} v1.0 Public Beta
+${CYAN}•${RESET} v1.0.1 Public Beta
 
 ${BOLD}System:${RESET}
 ${CYAN}•${RESET} macOS $MACOS
