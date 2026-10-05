@@ -1,7 +1,7 @@
 #!/bin/bash
 
 DEFAULT_PRISM_URL="https://github.com/nyxolz/prism-website/releases/download/y/Prism-v1.0.2-default.app.zip"
-USERMODE_PRISM_URL="https://github.com/nyxolz/prism-website/releases/download/e/prism-v1.0.2.usermode.app.zip"
+USERMODE_PRISM_URL="https://github.com/nyxolz/prism-website/releases/download/e/prism-v1.0.2-usermode.app.zip"
 ROBLOX_URL="https://setup.rbxcdn.com/mac/arm64/version-3bc33ee7ffad426f-RobloxPlayer.zip"
 SUPPORTED_VERSION="0.741.0.7411056"
 APP_NAME="Prism.app"
