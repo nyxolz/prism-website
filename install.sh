@@ -1,9 +1,9 @@
 #!/bin/bash
 
-DEFAULT_PRISM_URL="https://github.com/nyxolz/prism-website/releases/download/y/Prism-v1.0.2-default.app.zip"
-USERMODE_PRISM_URL="https://github.com/nyxolz/prism-website/releases/download/e/prism-v1.0.2-usermode.app.zip"
-ROBLOX_URL="https://setup.rbxcdn.com/mac/arm64/version-3bc33ee7ffad426f-RobloxPlayer.zip"
-SUPPORTED_VERSION="0.741.0.7411056"
+DEFAULT_PRISM_URL="https://github.com/nyxolz/prism-website/releases/download/f/Prism-v1.0.3-default.app.zip"
+USERMODE_PRISM_URL="https://github.com/nyxolz/prism-website/releases/download/f2/prism-v1.0.3-usermode.app.zip"
+ROBLOX_URL="https://setup.rbxcdn.com/mac/arm64/version-f9247f9560044102-RobloxPlayer.zip"
+SUPPORTED_VERSION="0.742.0.7421053"
 APP_NAME="Prism.app"
 
 TEMP_DIR="/tmp/prism-installer"
@@ -134,7 +134,7 @@ ${BOLD}Contributors:${RESET}
 ${CYAN}•${RESET} imeowforcash  github.com/imeowforcash
 
 ${BOLD}Prism:${RESET}
-${CYAN}•${RESET} v1.0.1 Public Beta
+${CYAN}•${RESET} v1.0.3 Public Beta
 
 ${BOLD}System:${RESET}
 ${CYAN}•${RESET} macOS $MACOS
