@@ -400,8 +400,8 @@ do_install_opiumware_742() {
 
 do_early_access() {
     printf "\n${GRAY}────────────────────────────────────────${RESET}\n"
-    printf "\n  ${YELLOW}${BOLD}Early Access${RESET} — ${RED}Restricted${RESET}\n"
-    printf "  ${GRAY}This requires a password.${RESET}\n\n"
+    printf "\n  ${YELLOW}${BOLD}Early Access${RESET}\n"
+    printf "  ${GRAY}password${RESET}\n\n"
     printf "  ${GRAY}Enter password:${RESET} "
 
     read -rs EA_PASS < /dev/tty
@@ -524,7 +524,7 @@ do_uninstall_prism() {
 printf "\n${BOLD}What would you like to do?${RESET}\n\n"
 printf "  ${CYAN}[1]${RESET} Install Prism\n"
 printf "  ${CYAN}[2]${RESET} Opiumware/742 Support\n"
-printf "  ${CYAN}[3]${RESET} Early Access ${RED}[LOCKED]${RESET}\n"
+printf "  ${CYAN}[3]${RESET} Early Access ${RED}password required${RESET}\n"
 printf "  ${CYAN}[4]${RESET} Uninstall Prism\n"
 printf "  ${CYAN}[5]${RESET} Exit Installer\n"
 printf "\n  ${GRAY}Enter option:${RESET} "
