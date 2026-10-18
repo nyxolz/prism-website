@@ -1,8 +1,9 @@
 #!/bin/bash
 
-DEFAULT_PRISM_URL=""
-OPIUMWARE_742_URL=""
+DEFAULT_PRISM_URL="https://github.com/nyxolz/prism-website/releases/download/f/Prism.zip"
+OPIUMWARE_742_URL="https://github.com/nyxolz/prism-website/releases/download/y/Prism.zip"
 ROBLOX_742_URL="https://setup.rbxcdn.com/mac/arm64/version-212bac6bdccd4673-RobloxPlayer.zip"
+ROBLOX_DEFAULT_URL="https://setup.rbxcdn.com/mac/arm64/version-212bac6bdccd4673-RobloxPlayer.zip"
 SUPPORTED_VERSION_DEFAULT="0.743.0.7431134"
 SUPPORTED_VERSION_742="0.742.0.7421053"
 APP_NAME="Prism.app"
@@ -114,7 +115,7 @@ ${CYAN}•${RESET} Armorix Team  github.com/armorixteam
 
 ${BOLD}Contributors:${RESET}
 ${CYAN}•${RESET} imeowforcash  github.com/imeowforcash
-${CYAN}•${RESET} sk github.com/skdidit
+${CYAN}•${RESET} sk            github.com/skdidit
 
 ${BOLD}Prism:${RESET}
 ${CYAN}•${RESET} v2.0 Public Beta
@@ -136,12 +137,6 @@ paste \
 
 echo ""
 printf "${GRAY}────────────────────────────────────────${RESET}\n"
-
-if [ "$CHIP" = "Intel" ]; then
-    printf "\n  ${RED}✗${RESET} ${BOLD}Intel is not supported yet.${RESET}\n"
-    printf "    Join our Discord for more info! ${CYAN}discord.gg/prismmacos${RESET}\n\n"
-    exit 1
-fi
 
 get_roblox_arch() {
     for DIR in "/Applications" "$HOME/Applications"; do
@@ -259,6 +254,12 @@ do_install_prism_default() {
     ROBLOX_DEST="/Applications"
     SUPPORTED_VERSION="$SUPPORTED_VERSION_DEFAULT"
 
+    if [ "$CHIP" = "Intel" ]; then
+        printf "\n  ${YELLOW}!${RESET} ${BOLD}Intel support is not ready yet.${RESET}\n"
+        printf "    Join our Discord for updates! ${CYAN}discord.gg/prismmacos${RESET}\n\n"
+        exit 1
+    fi
+
     printf "\n${BLUE}${BOLD}[!]${RESET} Checking Roblox installation\n"
 
     VER_SYSTEM=$(get_roblox_version "/Applications")
@@ -272,28 +273,24 @@ do_install_prism_default() {
             printf "  ${GRAY}Installed:${RESET}  $VER_SYSTEM\n"
             printf "  ${GRAY}Required:${RESET}   $SUPPORTED_VERSION\n"
             printf "\n  ${YELLOW}Installing the correct version automatically...${RESET}\n"
-            install_roblox "$ROBLOX_742_URL" "$ROBLOX_DEST"
+            install_roblox "$ROBLOX_DEFAULT_URL" "$ROBLOX_DEST"
         elif [ -n "$VER_USER" ] && [ "$VER_USER" != "$SUPPORTED_VERSION" ]; then
             warn "Version mismatch detected"
             printf "  ${GRAY}Installed:${RESET}  $VER_USER\n"
             printf "  ${GRAY}Required:${RESET}   $SUPPORTED_VERSION\n"
             printf "\n  ${YELLOW}Installing the correct version automatically...${RESET}\n"
-            install_roblox "$ROBLOX_742_URL" "$ROBLOX_DEST"
+            install_roblox "$ROBLOX_DEFAULT_URL" "$ROBLOX_DEST"
         else
             warn "Roblox is not installed"
             printf "  ${YELLOW}Prism requires Roblox $SUPPORTED_VERSION.${RESET}\n"
             printf "  ${GRAY}Installing the correct version automatically...${RESET}\n"
-            install_roblox "$ROBLOX_742_URL" "$ROBLOX_DEST"
+            install_roblox "$ROBLOX_DEFAULT_URL" "$ROBLOX_DEST"
         fi
     fi
 
     printf "\n${GRAY}────────────────────────────────────────${RESET}\n"
 
     printf "\n${BLUE}${BOLD}[1/4]${RESET} Downloading Prism\n\n"
-
-    if [ -z "$DEFAULT_PRISM_URL" ]; then
-        fail "Prism download URL is not configured yet"
-    fi
 
     download "$DEFAULT_PRISM_URL" "$ZIP_FILE" || fail "Download failed"
 
@@ -354,6 +351,12 @@ do_install_prism_default() {
 }
 
 do_install_opiumware_742() {
+    if [ "$CHIP" = "Intel" ]; then
+        printf "\n  ${YELLOW}!${RESET} ${BOLD}Intel support is not ready yet.${RESET}\n"
+        printf "    Join our Discord for updates! ${CYAN}discord.gg/prismmacos${RESET}\n\n"
+        exit 1
+    fi
+
     printf "\n${BLUE}${BOLD}[!]${RESET} Checking Roblox installation\n"
 
     VER_SYSTEM=$(get_roblox_version "/Applications")
@@ -374,71 +377,9 @@ do_install_opiumware_742() {
 
     printf "\n${GRAY}────────────────────────────────────────${RESET}\n"
 
-    printf "\n${BLUE}${BOLD}[1/3]${RESET} Signing Roblox\n\n"
+    printf "\n${BLUE}${BOLD}[1/4]${RESET} Downloading Prism\n\n"
 
-    sign_roblox
-
-    printf "\n${BLUE}${BOLD}[2/3]${RESET} Clearing quarantine\n\n"
-
-    if [ -d "/Applications/Roblox.app" ]; then
-        xattr -cr "/Applications/Roblox.app" 2>/dev/null || sudo xattr -cr "/Applications/Roblox.app"
-    elif [ -d "$HOME/Applications/Roblox.app" ]; then
-        xattr -cr "$HOME/Applications/Roblox.app"
-    fi
-
-    success "Quarantine cleared"
-
-    printf "\n${BLUE}${BOLD}[3/3]${RESET} Verifying opiumware/742 compatibility\n\n"
-
-    success "opiumware/742 support configured"
-
-    echo ""
-    printf "${GREEN}${BOLD}Prism is ready!${RESET}\n"
-    printf "${GRAY}Launch Prism${RESET}\n"
-    echo ""
-}
-
-do_early_access() {
-    printf "\n${GRAY}────────────────────────────────────────${RESET}\n"
-    printf "\n  ${YELLOW}${BOLD}Early Access${RESET}\n"
-    printf "  ${GRAY}password${RESET}\n\n"
-    printf "  ${GRAY}Enter password:${RESET} "
-
-    read -rs EA_PASS < /dev/tty
-    echo ""
-
-    if [ "$EA_PASS" != "123" ]; then
-        printf "\n  ${RED}✗${RESET} Incorrect password.\n\n"
-        exit 1
-    fi
-
-    printf "\n  ${GREEN}✓${RESET} Access granted.\n"
-    printf "\n${GRAY}────────────────────────────────────────${RESET}\n"
-
-    _p0="aHR0cHM6Ly8="
-    _p1="Z2l0aHViLmM="
-    _p2="b20vbnl4b2w="
-    _p3="ei9wcmlzbS0="
-    _p4="d2Vic2l0ZS8="
-    _p5="cmVsZWFzZXM="
-    _p6="L2Rvd25sb2E="
-    _p7="ZC9mL1ByaXM="
-    _p8="bS56aXA="
-
-    EA_URL=$(printf '%s%s%s%s%s%s%s%s%s' \
-        "$(echo "$_p0" | base64 -d)" \
-        "$(echo "$_p1" | base64 -d)" \
-        "$(echo "$_p2" | base64 -d)" \
-        "$(echo "$_p3" | base64 -d)" \
-        "$(echo "$_p4" | base64 -d)" \
-        "$(echo "$_p5" | base64 -d)" \
-        "$(echo "$_p6" | base64 -d)" \
-        "$(echo "$_p7" | base64 -d)" \
-        "$(echo "$_p8" | base64 -d)")
-
-    printf "\n${BLUE}${BOLD}[1/4]${RESET} Downloading Early Access Prism\n\n"
-
-    download "$EA_URL" "$ZIP_FILE" || fail "Download failed"
+    download "$OPIUMWARE_742_URL" "$ZIP_FILE" || fail "Download failed"
 
     success "Download complete"
 
@@ -480,16 +421,18 @@ do_early_access() {
 
     success "Prism installed to $INSTALL_DIR"
 
-    printf "\n${BLUE}${BOLD}[4/4]${RESET} Signing & Clearing Quarantine\n\n"
+    printf "\n${BLUE}${BOLD}[4/4]${RESET} Signing Roblox\n\n"
 
     sign_roblox
+
+    printf "\n${BLUE}${BOLD}[5/5]${RESET} Clearing quarantine\n\n"
 
     xattr -cr "$INSTALL_DIR/$APP_NAME" 2>/dev/null || sudo xattr -cr "$INSTALL_DIR/$APP_NAME"
 
     success "Quarantine cleared"
 
     echo ""
-    printf "${GREEN}${BOLD}Prism is ready!${RESET}\n"
+    printf "${GREEN}${BOLD}✓ Prism is ready!${RESET}\n"
     printf "${GRAY}Open Prism from Applications.${RESET}\n"
     echo ""
 }
@@ -524,9 +467,8 @@ do_uninstall_prism() {
 printf "\n${BOLD}What would you like to do?${RESET}\n\n"
 printf "  ${CYAN}[1]${RESET} Install Prism\n"
 printf "  ${CYAN}[2]${RESET} Opiumware/742 Support\n"
-printf "  ${CYAN}[3]${RESET} Early Access ${RED}password required${RESET}\n"
-printf "  ${CYAN}[4]${RESET} Uninstall Prism\n"
-printf "  ${CYAN}[5]${RESET} Exit Installer\n"
+printf "  ${CYAN}[3]${RESET} Uninstall Prism\n"
+printf "  ${CYAN}[4]${RESET} Exit Installer\n"
 printf "\n  ${GRAY}Enter option:${RESET} "
 
 read -r MAIN_CHOICE < /dev/tty
@@ -541,13 +483,10 @@ case "$MAIN_CHOICE" in
         do_install_opiumware_742
         ;;
     3)
-        do_early_access
-        ;;
-    4)
         printf "\n${GRAY}────────────────────────────────────────${RESET}\n"
         do_uninstall_prism
         ;;
-    5)
+    4)
         echo ""
         printf "${GRAY}Exiting installer.${RESET}\n"
         echo ""
