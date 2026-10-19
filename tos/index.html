@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="/AppIcon.png" type="image/png">
+<meta name="description" content="The official Prism Terms of Service">
+<meta name="theme-color" content="#0d0d0d">
+<title>Prism</title>
+<link rel="canonical" href="https://getprism.lol/tos">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Prism">
+<meta property="og:title" content="Prism — Terms of Service">
+<meta property="og:description" content="The official Prism Terms of Service">
+<meta property="og:url" content="https://getprism.lol/tos">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg-primary: #0d0d0d;
+  --glass-light: rgba(255, 255, 255, 0.02);
+  --glass-border: rgba(255, 255, 255, 0.06);
+  --text-primary: #ffffff;
+  --text-secondary: #999999;
+  --text-tertiary: #555555;
+  --accent: #2f6feb;
+  --accent-light: #4483f6;
+  --radius: 14px;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  overflow-x: hidden;
+  position: relative;
+  min-height: 100vh;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at 50% 0%, rgba(47, 111, 235, 0.025), transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 70px;
+  background: rgba(13, 13, 13, 0.85);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--glass-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
+  z-index: 100;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: var(--text-primary);
+}
+
+.brand img {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+header nav {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+header nav a {
+  appearance: none;
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 8px 16px;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  font-family: 'Inter', sans-serif;
+}
+
+header nav a:hover { color: var(--text-primary); }
+
+main {
+  position: relative;
+  z-index: 1;
+  margin-top: 70px;
+}
+
+section {
+  padding: 100px 40px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+section > h1 {
+  font-size: clamp(2rem, 6vw, 3.2rem);
+  font-weight: 700;
+  margin-bottom: 12px;
+  text-align: center;
+  letter-spacing: -0.02em;
+}
+
+.updated {
+  text-align: center;
+  color: var(--text-tertiary);
+  font-size: 0.9rem;
+  margin-bottom: 60px;
+}
+
+ol { list-style: none; padding: 0; }
+
+li {
+  padding: 26px 0 30px;
+  border-top: 1px solid var(--glass-border);
+}
+
+li:first-child { padding-top: 0; border-top: 0; }
+
+li h2 {
+  margin: 0 0 6px;
+  font-size: 1.4rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+li p {
+  color: var(--text-secondary);
+  font-weight: 500;
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+li p + p { margin-top: 12px; }
+
+li a {
+  color: var(--text-primary);
+  text-decoration: underline;
+  text-decoration-color: rgba(242, 242, 244, 0.35);
+  text-underline-offset: 0.2em;
+  transition: text-decoration-color 0.15s;
+}
+
+li a:hover { text-decoration-color: var(--text-primary); }
+
+footer {
+  border-top: 1px solid var(--glass-border);
+  padding: 40px;
+  text-align: center;
+  color: var(--text-tertiary);
+  font-size: 0.9rem;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+
+footer a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+footer a:hover { color: var(--text-primary); }
+
+footer p { margin: 6px 0; }
+
+.footer-fade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent, var(--bg-primary));
+  pointer-events: none;
+  z-index: -1;
+}
+
+@media (max-width: 768px) {
+  header { padding: 0 20px; }
+  section { padding: 60px 20px; }
+  section > h1 { font-size: 2rem; }
+  li h2 { font-size: 1.15rem; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <a class="brand" href="/">
+    <img src="AppIcon.png" alt="">
+    <span>prism</span>
+  </a>
+  <nav>
+    <a href="https://discord.gg/5hjeaF3Uj" target="_blank" rel="noopener">discord</a>
+  </nav>
+</header>
+
+<main>
+  <section>
+    <h1>Terms of Service</h1>
+    <p class="updated">Updated Sep 10 2026</p>
+    <article>
+      <ol>
+        <li>
+          <h2>Acceptance</h2>
+          <p>By accessing or using Prism ("the Software", "we", "us"), you agree to be bound by these Terms of Service. If you do not agree, do not use the Software. We reserve the right to update these terms at any time. Continued use after changes are posted constitutes acceptance of the revised terms.</p>
+        </li>
+        <li>
+          <h2>Nature of service</h2>
+          <p>Prism is provided free of charge as a personal project. We are not a registered business or legal entity. Nothing in these terms creates or implies a commercial relationship between you and Prism.</p>
+        </li>
+        <li>
+          <h2>Warranty disclaimer</h2>
+          <p>THE SOFTWARE IS PROVIDED "AS IS" AND "AS AVAILABLE," WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT. WE DO NOT WARRANT THAT THE SOFTWARE WILL BE ERROR-FREE, UNINTERRUPTED, SECURE, OR FREE OF VIRUSES OR OTHER HARMFUL COMPONENTS. YOUR USE OF THE SOFTWARE IS ENTIRELY AT YOUR OWN RISK.</p>
+        </li>
+        <li>
+          <h2>Limitation of liability</h2>
+          <p>TO THE FULLEST EXTENT PERMITTED BY APPLICABLE LAW, IN NO EVENT SHALL PRISM, ITS CONTRIBUTORS, OR ANYONE ASSOCIATED WITH THE PROJECT BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, EXEMPLARY, OR PUNITIVE DAMAGES ARISING OUT OF OR IN CONNECTION WITH YOUR USE OF OR INABILITY TO USE THE SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGES. THIS LIMITATION APPLIES REGARDLESS OF THE LEGAL THEORY ASSERTED, INCLUDING CONTRACT, TORT, NEGLIGENCE, STRICT LIABILITY, OR OTHERWISE.</p>
+        </li>
+        <li>
+          <h2>Permitted use</h2>
+          <p>You agree to use the Software only in accordance with all applicable local, state, national, and international laws and regulations. You are solely responsible for ensuring that your use of the Software complies with the terms of service of any third-party platforms, including but not limited to Roblox Corporation. Prism is not affiliated with, endorsed by, or in any way officially connected to Roblox Corporation. Use of this Software in connection with any third-party platform is entirely at your own risk.</p>
+        </li>
+        <li>
+          <h2>Indemnification</h2>
+          <p>You agree, to the fullest extent permitted by law, to indemnify, defend, and hold harmless Prism and any individuals associated with the project from and against any and all claims, damages, losses, liabilities, costs, and expenses (including reasonable legal fees) arising out of or relating to your use of the Software, your violation of these Terms, or your violation of any rights of a third party.</p>
+        </li>
+        <li>
+          <h2>Dispute resolution</h2>
+          <p>Any dispute arising out of or relating to these Terms or the Software shall be resolved on an individual basis. You waive any right to bring or participate in any class action, collective action, or representative proceeding against Prism or any individuals associated with the project.</p>
+        </li>
+        <li>
+          <h2>DMCA & copyright</h2>
+          <p>We respect the intellectual property rights of others. If you believe that any content made available through or in connection with Prism infringes a copyright you own or control, please send a written notice to <a href="mailto:nyxolz@proton.me">nyxolz@proton.me</a>. Your notice must include: a description of the copyrighted work you claim has been infringed; a description of where the allegedly infringing material is located; your contact information; a statement that you have a good-faith belief that the use is not authorized by the copyright owner; and a statement, under penalty of perjury, that the information in your notice is accurate and that you are the copyright owner or authorized to act on their behalf. We will respond to valid notices and take appropriate action.</p>
+        </li>
+        <li>
+          <h2>Termination</h2>
+          <p>We reserve the right to suspend or terminate access to the Software at any time, for any reason, without notice or liability.</p>
+        </li>
+        <li>
+          <h2>General</h2>
+          <p>These Terms constitute the entire agreement between you and Prism regarding your use of the Software and supersede all prior agreements, representations, and understandings. If any provision of these Terms is found to be unenforceable, the remaining provisions will continue in full force and effect. Our failure to enforce any provision does not constitute a waiver of our right to do so in the future.</p>
+          <p>For legal or DMCA inquiries: <a href="mailto:nyxolz@proton.me">nyxolz@proton.me</a></p>
+        </li>
+      </ol>
+    </article>
+  </section>
+</main>
+
+<footer>
+  <div class="footer-fade"></div>
+  <p>&copy; Prism</p>
+  <p>i hate all the skids</p>
+</footer>
+
+</body>
+</html>
