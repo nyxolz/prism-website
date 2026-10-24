@@ -3,8 +3,8 @@
 DEFAULT_PRISM_URL="https://github.com/nyxolz/prism-website/releases/download/f/Prism.zip"
 OPIUMWARE_742_URL="https://github.com/nyxolz/prism-website/releases/download/y/Prism.zip"
 ROBLOX_742_URL="https://setup.rbxcdn.com/mac/arm64/version-212bac6bdccd4673-RobloxPlayer.zip"
-ROBLOX_DEFAULT_URL="https://setup.rbxcdn.com/mac/arm64/version-212bac6bdccd4673-RobloxPlayer.zip"
-SUPPORTED_VERSION_DEFAULT="0.743.0.7431134"
+ROBLOX_DEFAULT_URL="https://setup.rbxcdn.com/mac/arm64/version-546c6da637854de3-RobloxPlayer.zip"
+SUPPORTED_VERSION_DEFAULT="0.744.0.7431134"
 SUPPORTED_VERSION_742="0.742.0.7421053"
 APP_NAME="Prism.app"
 
@@ -118,7 +118,7 @@ ${CYAN}•${RESET} imeowforcash  github.com/imeowforcash
 ${CYAN}•${RESET} sk            github.com/skdidit
 
 ${BOLD}Prism:${RESET}
-${CYAN}•${RESET} v2.0 Public Beta
+${CYAN}•${RESET} v2.1 Public Beta
 
 ${BOLD}System:${RESET}
 ${CYAN}•${RESET} macOS $MACOS
