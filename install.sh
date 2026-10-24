@@ -371,7 +371,7 @@ do_install_opiumware_742() {
 
     if [ "$FOUND_742" -eq 0 ]; then
         printf "\n  ${RED}✗${RESET} ${BOLD}You don't have opiumware or 742 installed. Run:${RESET}\n"
-      printf "\n      ${CYAN}\`Opiumware support isnt up rn`${RESET}\n\n"
+     printf "\n      ${CYAN}\"Opiumware support isnt up rn\"${RESET}\n\n"
         exit 1
     fi
 
