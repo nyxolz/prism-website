@@ -3,8 +3,8 @@
 DEFAULT_PRISM_URL="https://github.com/nyxolz/prism-website/releases/download/f/Prism.zip"
 OPIUMWARE_742_URL=$(echo -e "${RED}${BOLD}Opiumware support isnt up rn${RESET}" >&2; exit 1)
 ROBLOX_742_URL="https://setup.rbxcdn.com/mac/arm64/version-212bac6bdccd4673-RobloxPlayer.zip"
-ROBLOX_DEFAULT_URL="https://setup.rbxcdn.com/mac/arm64/version-546c6da637854de3-RobloxPlayer.zip"
-SUPPORTED_VERSION_DEFAULT="0.744.0.7441080"
+ROBLOX_DEFAULT_URL="https://setup.rbxcdn.com/mac/arm64/version-b09c93298b5d4cd1-RobloxPlayer.zip"
+SUPPORTED_VERSION_DEFAULT="0.745.0.7451137"
 SUPPORTED_VERSION_742="0.742.0.7421053"
 APP_NAME="Prism.app"
 
