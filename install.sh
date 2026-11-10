@@ -2,9 +2,10 @@
 
 DEFAULT_PRISM_URL="https://github.com/nyxolz/prism-website/releases/download/f/Prism.zip"
 INTEL_PRISM_URL="https://github.com/nyxolz/prism-website/releases/download/y/Prism-intel.zip"
-ROBLOX_ARM64_URL="https://setup.rbxcdn.com/mac/arm64/version-2fc79d515be6449d-RobloxPlayer.zip"
+ROBLOX_ARM64_URL="https://setup.rbxcdn.com/mac/arm64/version-8001f8762ae44efe-RobloxPlayer.zip"
 ROBLOX_INTEL_URL="https://setup.rbxcdn.com/mac/version-2fc79d515be6449d-RobloxPlayer.zip"
-SUPPORTED_VERSION="0.746.0.7461264"
+INTEL_SUPPORTED_VERSION="0.746.0.7461264"
+ARM64_SUPPORTED_VERSION="0.747.0.7471481"
 APP_NAME="Prism.app"
 
 TEMP_DIR="/tmp/prism-installer"
@@ -65,8 +66,10 @@ MACOS=$(sw_vers -productVersion)
 
 if [ "$(uname -m)" = "arm64" ]; then
     CHIP="Apple Silicon"
+    SUPPORTED_VERSION="$ARM64_SUPPORTED_VERSION"
 else
     CHIP="Intel"
+    SUPPORTED_VERSION="$INTEL_SUPPORTED_VERSION"
 fi
 
 MODEL=$(system_profiler SPHardwareDataType 2>/dev/null | awk -F': ' '/Model Name/ {print $2}')
@@ -117,7 +120,7 @@ ${BOLD}Contributors:${RESET}
 ${CYAN}•${RESET} imeowforcash  github.com/imeowforcash
 
 ${BOLD}Prism:${RESET}
-${CYAN}•${RESET} v3 Public Beta
+${CYAN}•${RESET} v3.5 Public Beta
 
 ${BOLD}System:${RESET}
 ${CYAN}•${RESET} macOS $MACOS
