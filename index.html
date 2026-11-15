@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Prism — Free macOS External for Roblox</title>
 <link rel="icon" href="data:,">
-<meta name="description" content="Prism — a free, keyless macOS external for Roblox. The best Roblox external on macOS. Download Prism, the leading Socrate alternative for Mac.">
+<meta name="description" content="Prism — a free, keyless macOS external for Roblox. The best Roblox external on macOS. Download Prism">
 <meta name="keywords" content="prism, prism macos, prism external, roblox external, roblox external macos, macos external roblox, socrate, socrate external, socrate alternative, roblox cheat mac, roblox hack mac, roblox exploit mac, free roblox external, keyless roblox external, roblox executor mac, roblox macro mac, prism roblox, getprism, getprism lol">
 <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
 <meta name="author" content="Prism">
@@ -13,12 +13,12 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://getprism.lol/">
 <meta property="og:title" content="Prism — Free Keyless macOS External for Roblox">
-<meta property="og:description" content="The best free Roblox external for macOS. Keyless, fast, and powerful. The top Socrate alternative on Mac.">
+<meta property="og:description" content="The best free Roblox external for macOS. Keyless, fast, and powerful.">
 <meta property="og:image" content="https://getprism.lol/AppIcon.png">
 <meta property="og:site_name" content="Prism">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Prism — Free Keyless macOS External for Roblox">
-<meta name="twitter:description" content="Free keyless Roblox external for macOS. ESP, aimbot, and more. Best Socrate alternative for Mac.">
+<meta name="twitter:description" content="Free keyless Roblox external for macOS. ESP, aimbot, and more">
 <meta name="twitter:image" content="https://getprism.lol/AppIcon.png">
 <script type="application/ld+json">
 {
@@ -33,7 +33,7 @@
     "priceCurrency": "USD"
   },
   "url": "https://getprism.lol",
-  "description": "Prism is a free, keyless macOS external for Roblox. No key system, no paywalls. The best Socrate alternative on macOS.",
+  "description": "Prism is a free, macOS external for Roblox",
   "keywords": "roblox external, macos external, socrate, socrate external, prism roblox, free roblox external"
 }
 </script>
@@ -80,75 +80,43 @@ body::before {
   z-index: 0;
 }
 
-.mobile-warning {
-  position: fixed;
-  inset: 0;
-  background: var(--bg-primary);
-  display: none;
-  align-items: center;
-  justify-content: center;
-  z-index: 200;
-  text-align: center;
-  padding: 20px;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.mobile-warning p {
-  color: var(--text-secondary);
-  max-width: 300px;
-}
-
-.mobile-warning p:last-child {
-  font-size: 0.85rem;
-  color: var(--text-tertiary);
-}
-
-@media (orientation: portrait) {
-  body > :not(.mobile-warning) {
-    display: none;
-  }
-  .mobile-warning {
-    display: flex;
-  }
-}
-
 nav {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  height: 70px;
-  background: rgba(13, 13, 13, 0.85);
+  height: 60px;
+  background: rgba(13, 13, 13, 0.9);
   backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--glass-border);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 40px;
+  padding: 0 24px;
   z-index: 100;
 }
 
 .nav-brand {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   text-decoration: none;
   font-weight: 700;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   color: var(--text-primary);
 }
 
 .nav-logo {
-  width: 32px;
-  height: 32px;
-  border-radius: 8px;
+  width: 28px;
+  height: 28px;
+  border-radius: 7px;
   object-fit: cover;
 }
 
 .nav-links {
   display: flex;
-  gap: 8px;
+  gap: 4px;
   align-items: center;
 }
 
@@ -157,14 +125,15 @@ nav {
   background: transparent;
   border: none;
   color: var(--text-secondary);
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   font-weight: 500;
   cursor: pointer;
-  padding: 8px 16px;
+  padding: 7px 12px;
   border-radius: 8px;
   transition: all 0.2s ease;
   text-decoration: none;
   font-family: 'Inter', sans-serif;
+  white-space: nowrap;
 }
 
 .nav-link:hover {
@@ -174,11 +143,11 @@ nav {
 main {
   position: relative;
   z-index: 1;
-  margin-top: 70px;
+  margin-top: 60px;
 }
 
 section {
-  padding: 100px 40px;
+  padding: 80px 24px;
   max-width: 1400px;
   margin: 0 auto;
   opacity: 0;
@@ -199,24 +168,25 @@ section:nth-child(3) { animation-delay: 0.1s; }
 
 .hero {
   text-align: center;
-  padding: 140px 40px 80px;
+  padding: 100px 24px 60px;
 }
 
 .hero-title {
-  font-size: clamp(3rem, 8vw, 4.5rem);
+  font-size: clamp(2.4rem, 8vw, 4.5rem);
   font-weight: 700;
   line-height: 1.1;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
   letter-spacing: -0.02em;
 }
 
 .hero-subtitle {
-  font-size: 1.2rem;
+  font-size: clamp(0.95rem, 2.5vw, 1.2rem);
   color: var(--text-secondary);
-  margin-bottom: 40px;
-  max-width: 600px;
+  margin-bottom: 32px;
+  max-width: 560px;
   margin-left: auto;
   margin-right: auto;
+  line-height: 1.6;
 }
 
 .hero-buttons {
@@ -241,6 +211,7 @@ section:nth-child(3) { animation-delay: 0.1s; }
   color: var(--text-primary);
   text-decoration: none;
   display: inline-block;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .btn:hover {
@@ -260,7 +231,7 @@ section:nth-child(3) { animation-delay: 0.1s; }
 }
 
 .section-title {
-  font-size: clamp(2rem, 6vw, 3.2rem);
+  font-size: clamp(1.8rem, 5vw, 3.2rem);
   font-weight: 700;
   margin-bottom: 12px;
   text-align: center;
@@ -275,13 +246,13 @@ section:nth-child(3) { animation-delay: 0.1s; }
 }
 
 .ui-section {
-  padding: 80px 40px;
+  padding: 60px 24px;
 }
 
 .ui-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 24px;
+  gap: 16px;
   max-width: 1200px;
   margin: 0 auto;
 }
@@ -289,7 +260,7 @@ section:nth-child(3) { animation-delay: 0.1s; }
 .ui-item {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
 }
 
 .ui-image {
@@ -309,8 +280,8 @@ section:nth-child(3) { animation-delay: 0.1s; }
 .ui-disclaimer {
   text-align: center;
   color: var(--text-tertiary);
-  font-size: 0.9rem;
-  margin-top: 20px;
+  font-size: 0.85rem;
+  margin-top: 16px;
   font-style: italic;
   max-width: 1200px;
   margin-left: auto;
@@ -321,14 +292,14 @@ section:nth-child(3) { animation-delay: 0.1s; }
   background: var(--glass-light);
   border: 1px solid var(--glass-border);
   border-radius: var(--radius);
-  padding: 40px;
+  padding: 28px 24px;
   max-width: 600px;
   margin: 0 auto;
 }
 
 .install-box h3 {
   font-size: 1.1rem;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
   color: var(--text-primary);
   font-weight: 600;
 }
@@ -337,13 +308,14 @@ section:nth-child(3) { animation-delay: 0.1s; }
   background: rgba(0, 0, 0, 0.4);
   border: 1px solid var(--glass-border);
   border-radius: 8px;
-  padding: 16px;
+  padding: 14px;
   font-family: 'Courier New', monospace;
-  font-size: 0.9rem;
+  font-size: clamp(0.7rem, 2vw, 0.9rem);
   color: var(--text-secondary);
   word-break: break-all;
-  margin-bottom: 16px;
+  margin-bottom: 14px;
   overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .copy-btn {
@@ -358,6 +330,8 @@ section:nth-child(3) { animation-delay: 0.1s; }
   font-weight: 600;
   transition: all 0.2s ease;
   font-family: 'Inter', sans-serif;
+  -webkit-tap-highlight-color: transparent;
+  width: 100%;
 }
 
 .copy-btn:hover {
@@ -367,10 +341,10 @@ section:nth-child(3) { animation-delay: 0.1s; }
 
 footer {
   border-top: 1px solid var(--glass-border);
-  padding: 40px;
+  padding: 32px 24px;
   text-align: center;
   color: var(--text-tertiary);
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   position: relative;
   z-index: 1;
 }
@@ -389,51 +363,17 @@ footer p {
   margin: 6px 0;
 }
 
-@media (max-width: 768px) {
-  nav {
-    padding: 0 20px;
-  }
-
-  section {
-    padding: 60px 20px;
-  }
-
-  .hero {
-    padding: 100px 20px 40px;
-  }
-
-  .hero-title {
-    font-size: 2.5rem;
-  }
-
-  .hero-buttons {
-    flex-direction: column;
-  }
-
-  .btn {
-    width: 100%;
-  }
-
-  .nav-links {
-    flex-direction: column;
-    gap: 4px;
-  }
-
-  .ui-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
 .tos-overlay {
   position: fixed;
   inset: 0;
   background: rgba(0, 0, 0, 0.75);
   backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   z-index: 999;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: center;
-  padding: 20px;
+  padding: 0;
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.2s ease;
@@ -447,14 +387,14 @@ footer p {
 .tos-modal {
   background: #111111;
   border: 1px solid var(--glass-border);
-  border-radius: var(--radius);
+  border-radius: var(--radius) var(--radius) 0 0;
   width: 100%;
-  max-width: 780px;
-  max-height: 80vh;
+  max-width: 100%;
+  max-height: 85vh;
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  transform: translateY(12px);
+  transform: translateY(20px);
   transition: transform 0.2s ease;
 }
 
@@ -466,19 +406,19 @@ footer p {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 20px 28px;
+  padding: 16px 20px;
   border-bottom: 1px solid var(--glass-border);
   flex-shrink: 0;
 }
 
 .tos-modal-header h2 {
-  font-size: 1rem;
+  font-size: 0.95rem;
   font-weight: 600;
   color: var(--text-primary);
 }
 
 .tos-modal-header span {
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   color: var(--text-tertiary);
 }
 
@@ -494,6 +434,7 @@ footer p {
   border-radius: 6px;
   transition: color 0.15s ease;
   font-family: 'Inter', sans-serif;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .tos-close:hover {
@@ -502,12 +443,13 @@ footer p {
 
 .tos-body {
   overflow-y: auto;
-  padding: 28px;
+  padding: 20px;
   color: var(--text-secondary);
-  font-size: 0.875rem;
+  font-size: 0.85rem;
   line-height: 1.7;
   scrollbar-width: thin;
   scrollbar-color: rgba(255,255,255,0.08) transparent;
+  -webkit-overflow-scrolling: touch;
 }
 
 .tos-body::-webkit-scrollbar {
@@ -520,7 +462,7 @@ footer p {
 }
 
 .tos-body p {
-  margin-bottom: 16px;
+  margin-bottom: 14px;
 }
 
 .tos-body a {
@@ -540,20 +482,113 @@ footer a.tos-trigger {
   background: none;
   border: none;
   font-family: 'Inter', sans-serif;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
 }
 
 footer a.tos-trigger:hover {
   color: var(--text-primary);
 }
+
+@media (min-width: 768px) {
+  nav {
+    height: 70px;
+    padding: 0 40px;
+  }
+
+  .nav-brand {
+    font-size: 1.2rem;
+    gap: 12px;
+  }
+
+  .nav-logo {
+    width: 32px;
+    height: 32px;
+  }
+
+  .nav-link {
+    font-size: 0.95rem;
+    padding: 8px 16px;
+  }
+
+  main {
+    margin-top: 70px;
+  }
+
+  section {
+    padding: 100px 40px;
+  }
+
+  .hero {
+    padding: 140px 40px 80px;
+  }
+
+  .ui-section {
+    padding: 80px 40px;
+  }
+
+  .ui-grid {
+    gap: 24px;
+  }
+
+  .install-box {
+    padding: 40px;
+  }
+
+  .copy-btn {
+    width: auto;
+  }
+
+  footer {
+    padding: 40px;
+    font-size: 0.9rem;
+  }
+
+  .tos-overlay {
+    align-items: center;
+    padding: 20px;
+  }
+
+  .tos-modal {
+    max-width: 780px;
+    max-height: 80vh;
+    border-radius: var(--radius);
+  }
+
+  .tos-modal-header {
+    padding: 20px 28px;
+  }
+
+  .tos-modal-header h2 {
+    font-size: 1rem;
+  }
+
+  .tos-modal-header span {
+    font-size: 0.8rem;
+  }
+
+  .tos-body {
+    padding: 28px;
+    font-size: 0.875rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .nav-links .nav-link:not(:last-child) {
+    display: none;
+  }
+
+  .hero-buttons .btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .ui-grid {
+    grid-template-columns: 1fr;
+  }
+}
 </style>
 </head>
 <body>
-
-<div class="mobile-warning">
-  <p>Please rotate your device to landscape mode to access this site.</p>
-  <p>This application is designed for desktop use only.</p>
-</div>
 
 <nav>
   <a class="nav-brand" href="#">
@@ -616,4 +651,34 @@ footer a.tos-trigger:hover {
       <button class="tos-close" onclick="document.getElementById('tosOverlay').classList.remove('open')">✕</button>
     </div>
     <div class="tos-body">
-      
+      <p>By accessing or using Prism ("the Software", "we", "us"), you agree to be bound by these Terms of Service. If you do not agree, do not use the Software. We reserve the right to update these terms at any time. Continued use after changes are posted constitutes acceptance of the revised terms.</p>
+      <p>Prism is provided free of charge as a personal project. We are not a registered business or legal entity. Nothing in these terms creates or implies a commercial relationship between you and Prism.</p>
+      <p>THE SOFTWARE IS PROVIDED "AS IS" AND "AS AVAILABLE," WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT. WE DO NOT WARRANT THAT THE SOFTWARE WILL BE ERROR-FREE, UNINTERRUPTED, SECURE, OR FREE OF VIRUSES OR OTHER HARMFUL COMPONENTS. YOUR USE OF THE SOFTWARE IS ENTIRELY AT YOUR OWN RISK.</p>
+      <p>TO THE FULLEST EXTENT PERMITTED BY APPLICABLE LAW, IN NO EVENT SHALL PRISM, ITS CONTRIBUTORS, OR ANYONE ASSOCIATED WITH THE PROJECT BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, EXEMPLARY, OR PUNITIVE DAMAGES ARISING OUT OF OR IN CONNECTION WITH YOUR USE OF OR INABILITY TO USE THE SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGES. THIS LIMITATION APPLIES REGARDLESS OF THE LEGAL THEORY ASSERTED, INCLUDING CONTRACT, TORT, NEGLIGENCE, STRICT LIABILITY, OR OTHERWISE.</p>
+      <p>You agree to use the Software only in accordance with all applicable local, state, national, and international laws and regulations. You are solely responsible for ensuring that your use of the Software complies with the terms of service of any third-party platforms, including but not limited to Roblox Corporation. Prism is not affiliated with, endorsed by, or in any way officially connected to Roblox Corporation. Use of this Software in connection with any third-party platform is entirely at your own risk.</p>
+      <p>You agree, to the fullest extent permitted by law, to indemnify, defend, and hold harmless Prism and any individuals associated with the project from and against any and all claims, damages, losses, liabilities, costs, and expenses (including reasonable legal fees) arising out of or relating to your use of the Software, your violation of these Terms, or your violation of any rights of a third party.</p>
+      <p>Any dispute arising out of or relating to these Terms or the Software shall be resolved on an individual basis. You waive any right to bring or participate in any class action, collective action, or representative proceeding against Prism or any individuals associated with the project.</p>
+      <p>We respect the intellectual property rights of others. If you believe that any content made available through or in connection with Prism infringes a copyright you own or control, please send a written notice to <a href="mailto:nyxolz@proton.me">nyxolz@proton.me</a>. Your notice must include: a description of the copyrighted work you claim has been infringed; a description of where the allegedly infringing material is located; your contact information; a statement that you have a good-faith belief that the use is not authorized by the copyright owner; and a statement, under penalty of perjury, that the information in your notice is accurate and that you are the copyright owner or authorized to act on their behalf. We will respond to valid notices and take appropriate action.</p>
+      <p>We reserve the right to suspend or terminate access to the Software at any time, for any reason, without notice or liability.</p>
+      <p>These Terms constitute the entire agreement between you and Prism regarding your use of the Software and supersede all prior agreements, representations, and understandings. If any provision of these Terms is found to be unenforceable, the remaining provisions will continue in full force and effect. Our failure to enforce any provision does not constitute a waiver of our right to do so in the future.</p>
+      <p>For legal or DMCA inquiries: <a href="mailto:nyxolz@proton.me">nyxolz@proton.me</a></p>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll('.copy-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      const codeBlock = this.previousElementSibling;
+      const code = codeBlock.textContent.trim();
+      navigator.clipboard.writeText(code).then(() => {
+        const original = this.textContent;
+        this.textContent = 'copied';
+        setTimeout(() => { this.textContent = original; }, 2000);
+      });
+    });
+  });
+</script>
+
+</body>
+</html>
