@@ -3,8 +3,8 @@
 DEFAULT_PRISM_URL="https://github.com/nyxolz/prism-website/releases/download/f/Prism.zip"
 INTEL_PRISM_URL="https://github.com/nyxolz/prism-website/releases/download/y/Prism-intel.zip"
 ROBLOX_ARM64_URL="https://setup.rbxcdn.com/mac/arm64/version-445548190fe44ee2-RobloxPlayer.zip"
-ROBLOX_INTEL_URL="https://setup.rbxcdn.com/mac/version-2fc79d515be6449d-RobloxPlayer.zip"
-INTEL_SUPPORTED_VERSION="0.746.0.7461264"
+ROBLOX_INTEL_URL="https://setup.rbxcdn.com/mac/version-445548190fe44ee2-RobloxPlayer.zip"
+INTEL_SUPPORTED_VERSION="0.748.0.7481526"
 ARM64_SUPPORTED_VERSION="0.748.0.7481526"
 APP_NAME="Prism.app"
 
