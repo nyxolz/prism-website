@@ -2,10 +2,10 @@
 
 DEFAULT_PRISM_URL="https://github.com/nyxolz/prism-website/releases/download/f/Prism.zip"
 INTEL_PRISM_URL="https://github.com/nyxolz/prism-website/releases/download/y/Prism-intel.zip"
-ROBLOX_ARM64_URL="https://setup.rbxcdn.com/mac/arm64/version-8001f8762ae44efe-RobloxPlayer.zip"
+ROBLOX_ARM64_URL="https://setup.rbxcdn.com/mac/arm64/version-445548190fe44ee2-RobloxPlayer.zip"
 ROBLOX_INTEL_URL="https://setup.rbxcdn.com/mac/version-2fc79d515be6449d-RobloxPlayer.zip"
 INTEL_SUPPORTED_VERSION="0.746.0.7461264"
-ARM64_SUPPORTED_VERSION="0.747.0.7471481"
+ARM64_SUPPORTED_VERSION="0.748.0.7481526"
 APP_NAME="Prism.app"
 
 TEMP_DIR="/tmp/prism-installer"
@@ -90,7 +90,7 @@ LEFT=$(cat <<'LOGO'
    %%#**+  =                   ====+++++   
   %%##**+.        %%@%%@@        ----====  
   ###**+-       ++***#%@@@.       #:-----  
- ******+.     @%.::=+#%%@-:.-     ##------ 
+  ******+.     @%.::=+#%%@-:.-     ##------ 
  ++++**+      %%#*.     %#-.:      ##----= 
  ====-*+     #@%##       ##*.-     **---== 
  %---:++      @%%%%     @##*+      ***-=== 
@@ -120,7 +120,7 @@ ${BOLD}Contributors:${RESET}
 ${CYAN}•${RESET} imeowforcash  github.com/imeowforcash
 
 ${BOLD}Prism:${RESET}
-${CYAN}•${RESET} v3.5 Public Beta
+${CYAN}•${RESET} v4 Public Beta
 
 ${BOLD}System:${RESET}
 ${CYAN}•${RESET} macOS $MACOS
@@ -198,6 +198,11 @@ install_roblox() {
     fi
 
     printf "\n  ${CYAN}Installed version:${RESET} $INSTALLED_VERSION\n"
+
+    if [ -d "$ROBLOX_DEST/Roblox.app/Contents/MacOS/RobloxMenuBar.app" ]; then
+        rm -rf "$ROBLOX_DEST/Roblox.app/Contents/MacOS/RobloxMenuBar.app" 2>/dev/null || sudo rm -rf "$ROBLOX_DEST/Roblox.app/Contents/MacOS/RobloxMenuBar.app"
+        success "Removed RobloxMenuBar.app"
+    fi
 }
 
 sign_roblox() {
@@ -220,13 +225,22 @@ sign_roblox() {
 </plist>
 EOF
 
-    if [ -d "/Applications/Roblox.app" ]; then
+    VER_SYSTEM=$(get_roblox_version "/Applications")
+    VER_USER=$(get_roblox_version "$HOME/Applications")
+
+    if [ "$VER_SYSTEM" = "$SUPPORTED_VERSION" ]; then
+        ROBLOX_APP_PATH="/Applications/Roblox.app"
+    elif [ "$VER_USER" = "$SUPPORTED_VERSION" ]; then
+        ROBLOX_APP_PATH="$HOME/Applications/Roblox.app"
+    elif [ -d "/Applications/Roblox.app" ]; then
         ROBLOX_APP_PATH="/Applications/Roblox.app"
     elif [ -d "$HOME/Applications/Roblox.app" ]; then
         ROBLOX_APP_PATH="$HOME/Applications/Roblox.app"
     else
         fail "Roblox.app not found for signing"
     fi
+
+    printf "\n  ${CYAN}Signing:${RESET} $ROBLOX_APP_PATH\n"
 
     if [ "$ROBLOX_APP_PATH" = "$HOME/Applications/Roblox.app" ]; then
         codesign --remove-signature "$ROBLOX_APP_PATH" 2>/dev/null
