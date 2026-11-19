@@ -199,6 +199,10 @@ install_roblox() {
 
     printf "\n  ${CYAN}Installed version:${RESET} $INSTALLED_VERSION\n"
 
+    pkill -9 -f '/Roblox.app/Contents/MacOS/' || true
+    pkill -9 -f '/RobloxMenuBar.app/Contents/' || true
+    defaults delete com.roblox.RobloxPlayerChannel www.roblox.com 2>/dev/null || true
+
     if [ -d "$ROBLOX_DEST/Roblox.app/Contents/MacOS/RobloxMenuBar.app" ]; then
         rm -rf "$ROBLOX_DEST/Roblox.app/Contents/MacOS/RobloxMenuBar.app" 2>/dev/null || sudo rm -rf "$ROBLOX_DEST/Roblox.app/Contents/MacOS/RobloxMenuBar.app"
         success "Removed RobloxMenuBar.app"
@@ -210,16 +214,14 @@ sign_roblox() {
 
     cat > "$ENTITLEMENTS_FILE" <<'EOF'
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://apple.com">
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-    <key>com.apple.security.cs.disable-executable-page-protection</key>
-    <true/>
-    <key>com.apple.security.device.audio-input</key>
-    <true/>
-    <key>com.apple.security.device.camera</key>
+    <key>com.apple.security.cs.debugger</key>
     <true/>
     <key>com.apple.security.get-task-allow</key>
+    <true/>
+    <key>com.apple.security.cs.disable-executable-page-protection</key>
     <true/>
 </dict>
 </plist>
@@ -243,11 +245,11 @@ EOF
     printf "\n  ${CYAN}Signing:${RESET} $ROBLOX_APP_PATH\n"
 
     if [ "$ROBLOX_APP_PATH" = "$HOME/Applications/Roblox.app" ]; then
-        codesign --remove-signature "$ROBLOX_APP_PATH" 2>/dev/null
         codesign --force --deep --sign - --entitlements "$ENTITLEMENTS_FILE" "$ROBLOX_APP_PATH" || fail "Failed to sign Roblox"
+        codesign --verify --deep --strict "$ROBLOX_APP_PATH" || fail "Failed to verify Roblox signature"
     else
-        codesign --remove-signature "$ROBLOX_APP_PATH" 2>/dev/null || sudo codesign --remove-signature "$ROBLOX_APP_PATH"
         codesign --force --deep --sign - --entitlements "$ENTITLEMENTS_FILE" "$ROBLOX_APP_PATH" 2>/dev/null || sudo codesign --force --deep --sign - --entitlements "$ENTITLEMENTS_FILE" "$ROBLOX_APP_PATH" || fail "Failed to sign Roblox"
+        codesign --verify --deep --strict "$ROBLOX_APP_PATH" 2>/dev/null || sudo codesign --verify --deep --strict "$ROBLOX_APP_PATH" || fail "Failed to verify Roblox signature"
     fi
 
     success "Roblox signed"
